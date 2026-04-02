@@ -71,6 +71,13 @@ export default function Portal() {
                 <span className="text-foreground font-semibold font-mono">1</span> / 3 clientes ativos
               </span>
             </div>
+            <button
+              onClick={signOut}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              Sair
+            </button>
           </div>
         </div>
       </header>
