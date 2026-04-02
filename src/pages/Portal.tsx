@@ -48,7 +48,9 @@ const units: UnitCard[] = [
 
 export default function Portal() {
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
+  const userEmail = user?.email ?? '';
+  const userInitial = userEmail.charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-background">
@@ -70,6 +72,16 @@ export default function Portal() {
               <span className="text-xs text-muted-foreground">
                 <span className="text-foreground font-semibold font-mono">1</span> / 3 clientes ativos
               </span>
+            </div>
+            <div className="h-6 w-px bg-border" />
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center">
+                <span className="text-xs font-semibold text-primary">{userInitial}</span>
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-xs font-medium text-foreground leading-none">{userEmail}</p>
+                <p className="text-[10px] text-muted-foreground mt-0.5">Founder</p>
+              </div>
             </div>
             <button
               onClick={signOut}
