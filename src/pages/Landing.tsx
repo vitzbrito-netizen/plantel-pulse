@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Eye, EyeOff, LogIn, UserPlus, Shield, BarChart3, Users, Zap } from 'lucide-react';
-import { useEffect } from 'react';
+import ForgotPassword from '@/components/ForgotPassword';
 
 export default function Landing() {
   const { user, loading } = useAuth();
