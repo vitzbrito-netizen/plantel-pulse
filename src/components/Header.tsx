@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { employees, teamStats } from '@/data/employees';
-import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft } from 'lucide-react';
+import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft, LogOut } from 'lucide-react';
 
 interface DropdownProps {
   label: string;
@@ -63,6 +64,7 @@ function Dropdown({ label, items, isOpen, onToggle, onClose }: DropdownProps) {
 export function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const handleToggle = (id: string) => {
     setOpenDropdown(prev => prev === id ? null : id);
@@ -140,6 +142,14 @@ export function Header() {
           <div className="text-[13px] text-muted-foreground">
             <span>Março 2026</span>
           </div>
+          <div className="h-6 w-px bg-border mx-2" />
+          <button
+            onClick={signOut}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            Sair
+          </button>
         </div>
       </div>
 

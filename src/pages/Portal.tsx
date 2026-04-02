@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { teamStats } from '@/data/employees';
-import { Users, TrendingUp, Heart, Building2, Lock, ChevronRight, Plus } from 'lucide-react';
+import { Users, TrendingUp, Heart, Building2, Lock, ChevronRight, Plus, LogOut } from 'lucide-react';
 
 interface UnitCard {
   id: string;
@@ -47,6 +48,7 @@ const units: UnitCard[] = [
 
 export default function Portal() {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,6 +71,13 @@ export default function Portal() {
                 <span className="text-foreground font-semibold font-mono">1</span> / 3 clientes ativos
               </span>
             </div>
+            <button
+              onClick={signOut}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              Sair
+            </button>
           </div>
         </div>
       </header>
