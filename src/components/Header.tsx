@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { employees, teamStats } from '@/data/employees';
-import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft } from 'lucide-react';
+import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft, LogOut } from 'lucide-react';
 
 interface DropdownProps {
   label: string;
