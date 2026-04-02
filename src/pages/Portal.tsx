@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { teamStats } from '@/data/employees';
-import { Users, TrendingUp, Heart, Building2, Lock, ChevronRight, Plus } from 'lucide-react';
+import { Users, TrendingUp, Heart, Building2, Lock, ChevronRight, Plus, LogOut } from 'lucide-react';
 
 interface UnitCard {
   id: string;
