@@ -48,6 +48,7 @@ const units: UnitCard[] = [
 
 export default function Portal() {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
