@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+@layer base {
+  :root {
+    /* FM2026 Dark Theme */
+    --background: 245 27% 7%; /* #0e0e18 */
+    --foreground: 240 33% 93%; /* #e8e8f0 */
+
+    --card: 245 33% 12%; /* #16162a */
+    --card-foreground: 240 33% 93%; /* #e8e8f0 */
+
+    --popover: 245 33% 12%;
+    --popover-foreground: 240 33% 93%;
+
+    --primary: 350 63% 28%; /* #7a1c2e */
+    --primary-foreground: 240 33% 93%;
+
+    --secondary: 245 25% 15%;
+    --secondary-foreground: 240 33% 93%;
+
+    --muted: 245 25% 18%;
+    --muted-foreground: 240 17% 60%; /* #8888aa */
+
+    --accent: 350 63% 28%;
+    --accent-foreground: 240 33% 93%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 33% 93%;
+
+    --border: 245 25% 20%; /* #2a2a40 */
+    --input: 245 25% 20%;
+    --ring: 350 63% 28%;
+
+    --radius: 0.25rem;
+
+    /* FM Header */
+    --header: 245 33% 5%; /* #0a0a14 */
+
+    /* Tier colors - FM gold/silver/bronze style */
+    --tier-lider: 43 96% 56%;
+    --tier-influente: 210 60% 50%;
+    --tier-promessa: 120 40% 45%;
+
+    /* Status colors */
+    --morale-high: 142 71% 45%;
+    --morale-mid: 43 96% 56%;
+    --morale-low: 0 84% 60%;
+
+    --urgente: 0 84% 60%;
+    --atencao: 43 96% 56%;
+
+    /* OVR colors */
+    --ovr-high: 142 71% 45%;
+    --ovr-mid: 43 96% 56%;
+    --ovr-low: 0 84% 60%;
+
+    /* Sidebar */
+    --sidebar-background: 245 33% 10%;
+    --sidebar-foreground: 240 33% 93%;
+    --sidebar-primary: 350 63% 28%;
+    --sidebar-primary-foreground: 240 33% 93%;
+    --sidebar-accent: 245 25% 18%;
+    --sidebar-accent-foreground: 240 33% 93%;
+    --sidebar-border: 245 25% 20%;
+    --sidebar-ring: 350 63% 28%;
+
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* FM Style Compact Typography */
+html {
+  font-size: 14px;
+}
+
+/* OVR Score styling */
+.ovr-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+/* FM Status dot */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-available {
+  background-color: hsl(142, 71%, 45%);
+  box-shadow: 0 0 4px hsl(142, 71%, 45%);
+}
+
+.status-warning {
+  background-color: hsl(43, 96%, 56%);
+  box-shadow: 0 0 4px hsl(43, 96%, 56%);
+}
+
+.status-critical {
+  background-color: hsl(0, 84%, 60%);
+  box-shadow: 0 0 4px hsl(0, 84%, 60%);
+}
+
+/* FM Morale bar */
+.morale-bar {
+  transition: width 0.3s ease;
+}
+
+.morale-bar-track {
+  background: hsl(245, 25%, 25%);
+}
+
+/* FM Table Rows */
+.fm-table-row {
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid hsl(245, 25%, 20%);
+}
+
+.fm-table-row:hover {
+  background-color: hsl(245, 25%, 15%);
+}
+
+.fm-table-row.selected {
+  background-color: hsl(350, 63%, 20%);
+}
+
+/* FM Tier badges */
+.tier-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tier-lider {
+  background: linear-gradient(135deg, hsl(43, 96%, 50%) 0%, hsl(35, 100%, 45%) 100%);
+  color: #000;
+}
+
+.tier-influente {
+  background: linear-gradient(135deg, hsl(210, 50%, 55%) 0%, hsl(210, 60%, 45%) 100%);
+  color: #fff;
+}
+
+.tier-promessa {
+  background: linear-gradient(135deg, hsl(120, 35%, 50%) 0%, hsl(120, 40%, 40%) 100%);
+  color: #fff;
+}
+
+/* FM OVR Colors */
+.ovr-high {
+  color: hsl(142, 71%, 50%);
+}
+
+.ovr-mid {
+  color: hsl(43, 96%, 56%);
+}
+
+.ovr-low {
+  color: hsl(0, 84%, 60%);
+}
+
+/* FM Dropdown Menu */
+.fm-dropdown {
+  background: hsl(245, 33%, 14%);
+  border: 1px solid hsl(245, 25%, 22%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.fm-dropdown-item {
+  transition: background-color 0.1s ease;
+}
+
+.fm-dropdown-item:hover {
+  background-color: hsl(245, 25%, 20%);
+}
+
+/* FM Sub-navigation */
+.fm-subnav {
+  background: hsl(245, 33%, 10%);
+  border-bottom: 1px solid hsl(245, 25%, 20%);
+}
+
+.fm-subnav-item {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: hsl(240, 17%, 60%);
+  transition: all 0.15s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.fm-subnav-item:hover {
+  color: hsl(240, 33%, 93%);
+  background: hsl(245, 25%, 15%);
+}
+
+.fm-subnav-item.active {
+  color: hsl(240, 33%, 93%);
+  border-bottom-color: hsl(350, 63%, 40%);
+}
+
+/* FM Sidebar Panel */
+.fm-sidebar {
+  background: hsl(245, 33%, 10%);
+  border-left: 1px solid hsl(245, 25%, 20%);
+}
+
+/* FM Skill bars */
+.fm-skill-bar {
+  height: 14px;
+  background: hsl(245, 25%, 18%);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fm-skill-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.fm-skill-value {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* FM Hierarchy Pyramid */
+.fm-pyramid-level {
+  position: relative;
+}
+
+.fm-pyramid-connector {
+  position: absolute;
+  background: hsl(245, 25%, 25%);
+}
+
+/* FM Relationship Grid */
+.fm-rel-cell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  border: 1px solid hsl(245, 25%, 20%);
+}
+
+.fm-rel-positive {
+  background: hsla(142, 71%, 45%, 0.2);
+  color: hsl(142, 71%, 50%);
+}
+
+.fm-rel-negative {
+  background: hsla(0, 84%, 60%, 0.2);
+  color: hsl(0, 84%, 60%);
+}
+
+.fm-rel-neutral {
+  background: hsl(245, 25%, 15%);
+  color: hsl(240, 17%, 50%);
+}
+
+/* FM Compact scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(245, 33%, 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(245, 25%, 25%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(245, 25%, 35%);
+}
+
+/* FM Flight Risk icon pulse */
+@keyframes pulse-risk {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-risk {
+  animation: pulse-risk 1.5s ease-in-out infinite;
+}
+
+/* FM Card hover */
+.fm-card {
+  background: hsl(245, 33%, 12%);
+  border: 1px solid hsl(245, 25%, 20%);
+  transition: border-color 0.15s ease;
+}
+
+.fm-card:hover {
+  border-color: hsl(245, 25%, 30%);
+}
+
+/* Alert pulse */
+@keyframes pulse-urgente {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.pulse-urgente {
+  animation: pulse-urgente 2s ease-in-out infinite;
+}
