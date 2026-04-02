@@ -64,6 +64,7 @@ function Dropdown({ label, items, isOpen, onToggle, onClose }: DropdownProps) {
 export function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const handleToggle = (id: string) => {
     setOpenDropdown(prev => prev === id ? null : id);
