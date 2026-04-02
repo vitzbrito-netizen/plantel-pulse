@@ -145,6 +145,13 @@ export function Header() {
             <span>Março 2026</span>
           </div>
           <div className="h-6 w-px bg-border mx-2" />
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center">
+              <span className="text-[10px] font-semibold text-primary">{userInitial}</span>
+            </div>
+            <span className="text-xs text-muted-foreground">{userEmail}</span>
+          </div>
+          <div className="h-6 w-px bg-border mx-1" />
           <button
             onClick={signOut}
             className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/30 rounded transition-colors"
