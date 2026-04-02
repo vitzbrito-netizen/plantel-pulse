@@ -48,7 +48,9 @@ const units: UnitCard[] = [
 
 export default function Portal() {
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
+  const userEmail = user?.email ?? '';
+  const userInitial = userEmail.charAt(0).toUpperCase();
 
   return (
     <div className="min-h-screen bg-background">
