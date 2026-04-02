@@ -15,6 +15,7 @@ export default function Landing() {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState('');
+  const [showForgot, setShowForgot] = useState(false);
 
   useEffect(() => {
     if (!loading && user) {
