@@ -6,24 +6,24 @@
 
 @layer base {
   :root {
-    /* Dark Theme */
-    --background: 220 25% 8%; /* dark navy */
-    --foreground: 210 20% 93%;
+    /* Light Theme — Blue Accent */
+    --background: 0 0% 100%; /* white */
+    --foreground: 220 25% 12%;
 
-    --card: 220 30% 13%;
-    --card-foreground: 210 20% 93%;
+    --card: 210 20% 97%;
+    --card-foreground: 220 25% 12%;
 
-    --popover: 220 30% 13%;
-    --popover-foreground: 210 20% 93%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
 
     --primary: 207 100% 50%; /* vibrant blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 25% 16%;
-    --secondary-foreground: 210 20% 93%;
+    --secondary: 210 20% 94%;
+    --secondary-foreground: 220 25% 12%;
 
-    --muted: 220 25% 18%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 210 15% 92%;
+    --muted-foreground: 215 10% 45%;
 
     --accent: 207 100% 50%;
     --accent-foreground: 0 0% 100%;
@@ -31,14 +31,14 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 20%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
     --ring: 207 100% 50%;
 
     --radius: 0.5rem;
 
     /* Header */
-    --header: 220 30% 6%;
+    --header: 0 0% 100%;
 
     /* Tier colors - FM gold/silver/bronze style */
     --tier-lider: 43 96% 56%;
