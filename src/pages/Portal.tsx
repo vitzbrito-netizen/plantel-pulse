@@ -24,7 +24,7 @@ const LoadingScreen = () => (
 );
 
 export default function Portal() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
   const { data: legacyRole, isLoading: roleLoading } = useUserRole();
   const updateProfile = useUpdateProfile();
