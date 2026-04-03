@@ -324,11 +324,11 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
 function StepCard({ step, title, description }: { step: string; title: string; description: string }) {
   return (
     <div className="text-center">
-      <div className="w-12 h-12 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center text-primary font-mono font-bold text-sm mx-auto mb-4">
+      <div className="w-12 h-12 bg-white/15 border border-white/20 rounded-full flex items-center justify-center text-white font-mono font-bold text-sm mx-auto mb-4">
         {step}
       </div>
-      <h3 className="font-bold text-foreground mb-2">{title}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <h3 className="font-bold text-white mb-2">{title}</h3>
+      <p className="text-sm text-white/60">{description}</p>
     </div>
   );
 }
