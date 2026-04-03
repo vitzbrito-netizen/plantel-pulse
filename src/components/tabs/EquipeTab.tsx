@@ -1,6 +1,7 @@
 import { employees, Employee, getMoraleColor, daysUntilExpiry, isContractExpiring, getInitials } from '@/data/employees';
-import { Flame, Moon, Sun, Zap, Trophy, TrendingUp, AlertTriangle, DollarSign, ChevronUp, ChevronDown, ChevronRight } from 'lucide-react';
+import { Flame, Moon, Sun, Zap, Trophy, TrendingUp, AlertTriangle, DollarSign, ChevronUp, ChevronDown, ChevronRight, LayoutGrid, List } from 'lucide-react';
 import { useState } from 'react';
+import { EmployeeCard } from '@/components/EmployeeCard';
 
 interface Props {
   onSelectEmployee: (emp: Employee) => void;
@@ -43,6 +44,7 @@ function getRoleCategory(role: string): string {
 export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('ovr');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [expandedSectors, setExpandedSectors] = useState<Record<string, boolean>>({
     'Analistas': true,
     'Técnicos': true,
@@ -220,34 +222,58 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
             <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" />
             <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" />
             <div className="flex-1" />
+            <div className="flex items-center gap-1 mr-2">
+              <button
+                onClick={() => setViewMode('table')}
+                className={`p-1.5 rounded transition-colors ${viewMode === 'table' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                title="Tabela"
+              >
+                <List className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('cards')}
+                className={`p-1.5 rounded transition-colors ${viewMode === 'cards' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+                title="Cards"
+              >
+                <LayoutGrid className="w-4 h-4" />
+              </button>
+            </div>
             <div className="text-[12px] text-muted-foreground">
               {employees.length} colaboradores | Folha: R$ {folha.toLocaleString('pt-BR')}/mês
             </div>
           </div>
 
-          <div className="fm-card rounded overflow-hidden flex-1">
-            <div className="overflow-auto max-h-[calc(100vh-220px)]">
-              <table className="w-full text-xs">
-                <thead className="bg-muted/30 sticky top-0">
-                  <tr>
-                    <th className="w-6 p-2"></th>
-                    <SortHeader label="Nome" sortKeyProp="name" width="w-44" />
-                    <SortHeader label="Cargo" sortKeyProp="role" width="w-40" />
-                    <SortHeader label="Tier" sortKeyProp="tier" width="w-20" />
-                    <SortHeader label="OVR" sortKeyProp="ovr" width="w-14" />
-                    <th className="text-left p-2 text-[12px] font-semibold text-muted-foreground uppercase w-28">Moral</th>
-                    <SortHeader label="Turno" sortKeyProp="turno" width="w-20" />
-                    <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" />
-                    <SortHeader label="Salário" sortKeyProp="salary" width="w-24" />
-                    <th className="w-8 p-2"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
-                </tbody>
-              </table>
+          {viewMode === 'table' ? (
+            <div className="fm-card rounded overflow-hidden flex-1">
+              <div className="overflow-auto max-h-[calc(100vh-220px)]">
+                <table className="w-full text-xs">
+                  <thead className="bg-muted/30 sticky top-0">
+                    <tr>
+                      <th className="w-6 p-2"></th>
+                      <SortHeader label="Nome" sortKeyProp="name" width="w-44" />
+                      <SortHeader label="Cargo" sortKeyProp="role" width="w-40" />
+                      <SortHeader label="Tier" sortKeyProp="tier" width="w-20" />
+                      <SortHeader label="OVR" sortKeyProp="ovr" width="w-14" />
+                      <th className="text-left p-2 text-[12px] font-semibold text-muted-foreground uppercase w-28">Moral</th>
+                      <SortHeader label="Turno" sortKeyProp="turno" width="w-20" />
+                      <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" />
+                      <SortHeader label="Salário" sortKeyProp="salary" width="w-24" />
+                      <th className="w-8 p-2"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-220px)] flex-1">
+              {sortedEmployees.map(emp => (
+                <EmployeeCard key={emp.id} employee={emp} onClick={onSelectEmployee} />
+              ))}
+            </div>
+          )}
         </div>
 
         {!selectedEmployee && (
