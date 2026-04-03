@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      clients: {
+        Row: {
+          city: string
+          created_at: string
+          created_by: string
+          headcount: number
+          id: string
+          morale: number
+          name: string
+          ovr: number
+          slug: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          city: string
+          created_at?: string
+          created_by: string
+          headcount?: number
+          id?: string
+          morale?: number
+          name: string
+          ovr?: number
+          slug: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          created_at?: string
+          created_by?: string
+          headcount?: number
+          id?: string
+          morale?: number
+          name?: string
+          ovr?: number
+          slug?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
