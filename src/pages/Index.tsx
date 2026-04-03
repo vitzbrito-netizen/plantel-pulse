@@ -25,6 +25,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>('equipe');
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
   const [cpoEmployee, setCpoEmployee] = useState<Employee | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
