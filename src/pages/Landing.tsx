@@ -311,12 +311,12 @@ function StatItem({ value, label }: { value: string; label: string }) {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 transition-colors group">
-      <div className="w-10 h-10 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary mb-4 group-hover:bg-primary/20 transition-colors">
+    <div className="bg-white/10 border border-white/15 rounded-xl p-6 hover:bg-white/15 transition-colors group">
+      <div className="w-10 h-10 bg-white/15 border border-white/20 rounded-lg flex items-center justify-center text-white mb-4 group-hover:bg-white/25 transition-colors">
         {icon}
       </div>
-      <h3 className="font-bold text-foreground mb-2">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+      <h3 className="font-bold text-white mb-2">{title}</h3>
+      <p className="text-sm text-white/60 leading-relaxed">{description}</p>
     </div>
   );
 }
