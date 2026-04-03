@@ -138,9 +138,9 @@ export function Header() {
 
         {/* Stats */}
         <div className="flex items-center gap-1">
-          <StatBadge icon={<TrendingUp className="w-3 h-3" />} label="OVR" value={teamStats.avgOvr} />
-          <StatBadge icon={<Heart className="w-3 h-3" />} label="Moral" value={teamStats.avgMorale} color={teamStats.avgMorale >= 75 ? 'text-morale-high' : teamStats.avgMorale >= 60 ? 'text-morale-mid' : 'text-morale-low'} />
-          <StatBadge icon={<Users className="w-3 h-3" />} label="Equipe" value={teamStats.headcount} />
+          <StatBadge icon={<TrendingUp className="w-3 h-3" />} label="OVR" value={teamStats.avgOvr} tooltip="Overall Rating — Média geral da equipe (0-100)" />
+          <StatBadge icon={<Heart className="w-3 h-3" />} label="Moral" value={teamStats.avgMorale} color={teamStats.avgMorale >= 75 ? 'text-morale-high' : teamStats.avgMorale >= 60 ? 'text-morale-mid' : 'text-morale-low'} tooltip="Moral — Nível médio de motivação e satisfação da equipe" />
+          <StatBadge icon={<Users className="w-3 h-3" />} label="Equipe" value={teamStats.headcount} tooltip="Total de colaboradores ativos na unidade" />
           <div className="h-6 w-px bg-border mx-2" />
           <div className="text-[13px] text-muted-foreground">
             <span>Março 2026</span>
