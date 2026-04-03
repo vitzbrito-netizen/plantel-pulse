@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { employees, teamStats } from '@/data/employees';
 import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft, LogOut } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface DropdownProps {
   label: string;
@@ -137,9 +138,9 @@ export function Header() {
 
         {/* Stats */}
         <div className="flex items-center gap-1">
-          <StatBadge icon={<TrendingUp className="w-3 h-3" />} label="OVR" value={teamStats.avgOvr} />
-          <StatBadge icon={<Heart className="w-3 h-3" />} label="Moral" value={teamStats.avgMorale} color={teamStats.avgMorale >= 75 ? 'text-morale-high' : teamStats.avgMorale >= 60 ? 'text-morale-mid' : 'text-morale-low'} />
-          <StatBadge icon={<Users className="w-3 h-3" />} label="Equipe" value={teamStats.headcount} />
+          <StatBadge icon={<TrendingUp className="w-3 h-3" />} label="OVR" value={teamStats.avgOvr} tooltip="Overall Rating — Média geral da equipe (0-100)" />
+          <StatBadge icon={<Heart className="w-3 h-3" />} label="Moral" value={teamStats.avgMorale} color={teamStats.avgMorale >= 75 ? 'text-morale-high' : teamStats.avgMorale >= 60 ? 'text-morale-mid' : 'text-morale-low'} tooltip="Moral — Nível médio de motivação e satisfação da equipe" />
+          <StatBadge icon={<Users className="w-3 h-3" />} label="Equipe" value={teamStats.headcount} tooltip="Total de colaboradores ativos na unidade" />
           <div className="h-6 w-px bg-border mx-2" />
           <div className="text-[13px] text-muted-foreground">
             <span>Março 2026</span>
@@ -182,14 +183,21 @@ export function Header() {
   );
 }
 
-function StatBadge({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: number; color?: string }) {
+function StatBadge({ icon, label, value, color, tooltip }: { icon: React.ReactNode; label: string; value: number; color?: string; tooltip?: string }) {
   return (
-    <div className="flex items-center gap-2 bg-card/50 border border-border rounded px-2.5 py-1.5">
-      <span className="text-muted-foreground">{icon}</span>
-      <div className="text-right">
-        <p className="text-[11px] text-muted-foreground uppercase">{label}</p>
-        <p className={`text-[20px] font-bold font-mono leading-none ${color || 'text-foreground'}`}>{value}</p>
-      </div>
-    </div>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center gap-2 bg-card/50 border border-border rounded px-2.5 py-1.5 cursor-default">
+            <span className="text-muted-foreground">{icon}</span>
+            <div className="text-right">
+              <p className="text-[11px] text-muted-foreground uppercase">{label}</p>
+              <p className={`text-[20px] font-bold font-mono leading-none ${color || 'text-foreground'}`}>{value}</p>
+            </div>
+          </div>
+        </TooltipTrigger>
+        {tooltip && <TooltipContent><p className="text-xs">{tooltip}</p></TooltipContent>}
+      </Tooltip>
+    </TooltipProvider>
   );
 }

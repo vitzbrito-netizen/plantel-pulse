@@ -1,7 +1,8 @@
-import { employees, Employee, getMoraleColor, daysUntilExpiry, isContractExpiring, getInitials } from '@/data/employees';
+import { employees, Employee, getMoraleColor, getMoraleLabel, daysUntilExpiry, isContractExpiring, getInitials } from '@/data/employees';
 import { Flame, Moon, Sun, Zap, Trophy, TrendingUp, AlertTriangle, DollarSign, ChevronUp, ChevronDown, ChevronRight, LayoutGrid, List } from 'lucide-react';
 import { useState } from 'react';
 import { EmployeeCard } from '@/components/EmployeeCard';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface Props {
   onSelectEmployee: (emp: Employee) => void;
@@ -160,55 +161,113 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
       );
     }
 
+    const tierDesc = emp.tier === 'Líder' ? 'Líder — Peça-chave, alto impacto na equipe' : emp.tier === 'Influente' ? 'Influente — Contribuidor sólido e confiável' : 'Promessa — Em desenvolvimento, alto potencial';
+    const statusDesc = emp.flightRisk || emp.morale < 50 ? 'Crítico — Atenção imediata necessária' : emp.morale < 65 || isContractExpiring(emp.contractEnd, 60) ? 'Atenção — Monitorar de perto' : 'Disponível — Situação estável';
+    const turnoDesc = emp.turno === 'Diurno' ? 'Turno Diurno — Horário comercial' : emp.turno === 'Noturno' ? 'Turno Noturno — Horário noturno' : 'Turno Integral — Cobertura total';
+    const moraleLabel = getMoraleLabel(emp.morale);
+    const pendingNote = emp.pendingFields && emp.pendingFields.length > 0 ? `\n⏳ Dados estimados: ${emp.pendingFields.join(', ')}` : '';
+
     return (
-      <tr 
-        onClick={() => onSelectEmployee(emp)}
-        className={`fm-table-row cursor-pointer ${isSelected ? 'selected' : ''}`}
-      >
-        <td className="p-2">
-          <div className={`status-dot ${getStatusClass(emp)}`} />
-        </td>
-        <td className="p-2 text-[13px] font-medium truncate max-w-44">{emp.name}</td>
-        <td className="p-2 text-[12px] text-muted-foreground truncate max-w-40">{emp.role}</td>
-        <td className="p-2">
-          <span className={`tier-badge ${getTierBadgeClass(emp.tier)}`}>
-            {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
-          </span>
-        </td>
-        <td className="p-2">
-          <span className={`font-mono font-bold text-sm ${getOvrClass(emp.ovr)}`}>{emp.ovr}</span>
-        </td>
-        <td className="p-2">
-          <div className="flex items-center gap-2">
-            <div className="flex-1 h-3 morale-bar-track rounded-sm overflow-hidden">
-              <div 
-                className="h-full morale-bar rounded-sm"
-                style={{ width: `${emp.morale}%`, backgroundColor: getMoraleColor(emp.morale) }}
-              />
-            </div>
-            <span className="text-[12px] font-mono w-6 text-right" style={{ color: getMoraleColor(emp.morale) }}>
-              {emp.morale}
-            </span>
-          </div>
-        </td>
-        <td className="p-2">
-          <span className="flex items-center gap-1 text-muted-foreground">
-            {turnoIcon}
-            <span className="text-[12px]">{emp.turno === 'Noturno' ? 'NOT' : emp.turno === 'Integral' ? 'INT' : 'DIA'}</span>
-          </span>
-        </td>
-        <td className="p-2">
-          <span className={`text-[12px] font-mono ${days <= 30 ? 'text-urgente' : expiring ? 'text-atencao' : 'text-muted-foreground'}`}>
-            {days <= 0 ? 'VENC' : `${days}d`}
-          </span>
-        </td>
-        <td className="p-2 text-muted-foreground font-mono text-[12px]">
-          R$ {emp.salary.toLocaleString('pt-BR')}
-        </td>
-        <td className="p-2">
-          {emp.flightRisk && <Flame className="w-3.5 h-3.5 text-urgente pulse-risk" />}
-        </td>
-      </tr>
+      <TooltipProvider delayDuration={200}>
+        <tr 
+          onClick={() => onSelectEmployee(emp)}
+          className={`fm-table-row cursor-pointer ${isSelected ? 'selected' : ''}`}
+        >
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild><div className={`status-dot ${getStatusClass(emp)}`} /></TooltipTrigger>
+              <TooltipContent side="right"><p className="text-xs">{statusDesc}</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2 text-[13px] font-medium truncate max-w-44">
+            <Tooltip>
+              <TooltipTrigger asChild><span>{emp.name}</span></TooltipTrigger>
+              <TooltipContent side="top" className="max-w-64">
+                <p className="text-xs font-semibold">{emp.name}</p>
+                <p className="text-[11px] text-muted-foreground">{emp.role} • {emp.tier} • OVR {emp.ovr}{pendingNote}</p>
+              </TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2 text-[12px] text-muted-foreground truncate max-w-40">{emp.role}</td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className={`tier-badge ${getTierBadgeClass(emp.tier)}`}>
+                  {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">{tierDesc}</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className={`font-mono font-bold text-sm ${getOvrClass(emp.ovr)}`}>{emp.ovr}</span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">Overall Rating — Nota geral do colaborador (0-100)</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 h-3 morale-bar-track rounded-sm overflow-hidden">
+                    <div 
+                      className="h-full morale-bar rounded-sm"
+                      style={{ width: `${emp.morale}%`, backgroundColor: getMoraleColor(emp.morale) }}
+                    />
+                  </div>
+                  <span className="text-[12px] font-mono w-6 text-right" style={{ color: getMoraleColor(emp.morale) }}>
+                    {emp.morale}
+                  </span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">Moral: {emp.morale}% — {moraleLabel}</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="flex items-center gap-1 text-muted-foreground">
+                  {turnoIcon}
+                  <span className="text-[12px]">{emp.turno === 'Noturno' ? 'NOT' : emp.turno === 'Integral' ? 'INT' : 'DIA'}</span>
+                </span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">{turnoDesc}</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className={`text-[12px] font-mono ${days <= 30 ? 'text-urgente' : expiring ? 'text-atencao' : 'text-muted-foreground'}`}>
+                  {days <= 0 ? 'VENC' : `${days}d`}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">
+                  {days <= 0 ? 'Contrato vencido!' : days <= 30 ? `Contrato vence em ${days} dias — Urgente!` : days <= 90 ? `Contrato vence em ${days} dias — Atenção` : `Contrato vence em ${days} dias`}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="text-muted-foreground font-mono text-[12px]">R$ {emp.salary.toLocaleString('pt-BR')}</span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">Salário mensal bruto</p></TooltipContent>
+            </Tooltip>
+          </td>
+          <td className="p-2">
+            {emp.flightRisk && (
+              <Tooltip>
+                <TooltipTrigger asChild><Flame className="w-3.5 h-3.5 text-urgente pulse-risk" /></TooltipTrigger>
+                <TooltipContent><p className="text-xs">⚠️ Risco de Fuga — Colaborador pode deixar a empresa</p></TooltipContent>
+              </Tooltip>
+            )}
+          </td>
+        </tr>
+      </TooltipProvider>
     );
   };
 
@@ -217,10 +276,10 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
       <div className="flex gap-4 h-full">
         <div className="flex-1 flex flex-col min-w-0">
           <div className="flex items-center gap-2 mb-3">
-            <QuickStat icon={<Trophy className="w-3 h-3 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} />
-            <QuickStat icon={<TrendingUp className="w-3 h-3 text-morale-high" />} label="OVR 80+" value={highOvr} />
-            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" />
-            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" />
+            <QuickStat icon={<Trophy className="w-3 h-3 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Colaboradores no tier Líder — peças-chave da equipe" />
+            <QuickStat icon={<TrendingUp className="w-3 h-3 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Colaboradores com Overall Rating acima de 80" />
+            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" tooltip="Colaboradores com risco de deixar a empresa" />
+            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" tooltip="Colaboradores com Overall Rating abaixo de 65 — precisam de desenvolvimento" />
             <div className="flex-1" />
             <div className="flex items-center bg-muted/40 rounded-lg p-0.5 gap-0.5">
               <button
@@ -593,13 +652,20 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
   return null;
 }
 
-function QuickStat({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: number; color?: string }) {
+function QuickStat({ icon, label, value, color, tooltip }: { icon: React.ReactNode; label: string; value: number; color?: string; tooltip?: string }) {
   return (
-    <div className="flex items-center gap-1.5 bg-card/50 border border-border rounded px-2.5 py-1.5">
-      {icon}
-      <span className="text-[12px] text-muted-foreground">{label}:</span>
-      <span className={`text-[13px] font-bold font-mono ${color || 'text-foreground'}`}>{value}</span>
-    </div>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center gap-1.5 bg-card/50 border border-border rounded px-2.5 py-1.5 cursor-default">
+            {icon}
+            <span className="text-[12px] text-muted-foreground">{label}:</span>
+            <span className={`text-[13px] font-bold font-mono ${color || 'text-foreground'}`}>{value}</span>
+          </div>
+        </TooltipTrigger>
+        {tooltip && <TooltipContent><p className="text-xs">{tooltip}</p></TooltipContent>}
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 
