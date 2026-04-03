@@ -1,0 +1,73 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
+import { useProfile } from '@/hooks/useProfile';
+
+export interface CompanyMember {
+  id: string;
+  user_id: string;
+  full_name: string;
+  role: string | null;
+  company_id: string | null;
+  created_at: string;
+}
+
+export function useCompanyMembers() {
+  const { data: profile } = useProfile();
+
+  return useQuery({
+    queryKey: ['company-members', profile?.company_id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('company_id', profile!.company_id!)
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as CompanyMember[];
+    },
+    enabled: !!profile?.company_id,
+  });
+}
+
+export function useTransferOwnership() {
+  const qc = useQueryClient();
+  const { user } = useAuth();
+  const { data: profile } = useProfile();
+
+  return useMutation({
+    mutationFn: async (targetUserId: string) => {
+      const { error } = await supabase.rpc('transfer_ownership', {
+        _current_owner_id: user!.id,
+        _new_owner_id: targetUserId,
+        _company_id: profile!.company_id!,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['profile'] });
+      qc.invalidateQueries({ queryKey: ['user-role'] });
+      qc.invalidateQueries({ queryKey: ['company-members'] });
+    },
+  });
+}
+
+export function useRemoveMember() {
+  const qc = useQueryClient();
+  const { user } = useAuth();
+  const { data: profile } = useProfile();
+
+  return useMutation({
+    mutationFn: async (targetUserId: string) => {
+      const { error } = await supabase.rpc('remove_member', {
+        _actor_id: user!.id,
+        _target_id: targetUserId,
+        _company_id: profile!.company_id!,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['company-members'] });
+    },
+  });
+}
