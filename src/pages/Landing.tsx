@@ -88,7 +88,7 @@ export default function Landing() {
       </section>
 
       {/* Stats bar */}
-      <section className="border-y border-white/10 bg-white/5">
+      <section className="border-y border-border/50 bg-muted/50">
         <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <StatItem value="500+" label="Colaboradores gerenciados" />
           <StatItem value="98%" label="Taxa de retenção" />
