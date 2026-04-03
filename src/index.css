@@ -313,13 +313,13 @@ html {
 
 /* Card hover */
 .fm-card {
-  background: hsl(220, 30%, 13%);
-  border: 1px solid hsl(220, 25%, 20%);
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(210, 15%, 90%);
   transition: border-color 0.15s ease;
 }
 
 .fm-card:hover {
-  border-color: hsl(220, 25%, 30%);
+  border-color: hsl(207, 100%, 50%);
 }
 
 /* Alert pulse */
