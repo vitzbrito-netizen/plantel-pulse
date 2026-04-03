@@ -222,20 +222,20 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
             <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" />
             <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" />
             <div className="flex-1" />
-            <div className="flex items-center gap-1 mr-2">
+            <div className="flex items-center bg-muted/40 rounded-lg p-0.5 gap-0.5">
               <button
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded transition-colors ${viewMode === 'table' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'}`}
-                title="Tabela"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-colors ${viewMode === 'table' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
-                <List className="w-4 h-4" />
+                <List className="w-4.5 h-4.5" />
+                Tabela
               </button>
               <button
                 onClick={() => setViewMode('cards')}
-                className={`p-1.5 rounded transition-colors ${viewMode === 'cards' ? 'bg-primary/20 text-primary' : 'text-muted-foreground hover:text-foreground'}`}
-                title="Cards"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium transition-colors ${viewMode === 'cards' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
-                <LayoutGrid className="w-4 h-4" />
+                <LayoutGrid className="w-4.5 h-4.5" />
+                Cards
               </button>
             </div>
             <div className="text-[12px] text-muted-foreground">
