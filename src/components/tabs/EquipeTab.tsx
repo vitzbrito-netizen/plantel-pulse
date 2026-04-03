@@ -290,7 +290,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-240px)] flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-240px)] flex-1">
             {sortedEmployees.map(emp => (
               <EmployeeCard key={emp.id} employee={emp} onClick={onSelectEmployee} />
             ))}
