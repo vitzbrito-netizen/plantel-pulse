@@ -117,17 +117,9 @@ export function OnboardingQuiz({ onComplete }: Props) {
     }
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     if (!result) return;
-    setSaving(true);
-    try {
-      await assignRole.mutateAsync(result);
-      onComplete(result);
-    } catch (err: any) {
-      toast.error(err.message || 'Erro ao salvar perfil');
-    } finally {
-      setSaving(false);
-    }
+    onComplete(result);
   };
 
   // Result screen
