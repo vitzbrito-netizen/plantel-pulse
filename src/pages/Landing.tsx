@@ -337,20 +337,20 @@ function PricingCard({ name, price, period, description, features, cta, highligh
   name: string; price: string; period: string; description: string; features: string[]; cta: string; highlighted: boolean;
 }) {
   return (
-    <div className={`rounded-xl p-6 border ${highlighted ? 'border-white bg-white/15 ring-1 ring-white/30' : 'border-white/15 bg-white/10'} flex flex-col`}>
+    <div className={`rounded-xl p-6 border ${highlighted ? 'border-primary bg-primary/5 ring-1 ring-primary/20' : 'border-border bg-card'} flex flex-col`}>
       {highlighted && (
-        <div className="text-[10px] font-bold uppercase tracking-widest text-white mb-3">Mais Popular</div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-primary mb-3">Mais Popular</div>
       )}
-      <h3 className="font-bold text-lg text-white">{name}</h3>
-      <p className="text-xs text-white/60 mb-4">{description}</p>
+      <h3 className="font-bold text-lg">{name}</h3>
+      <p className="text-xs text-muted-foreground mb-4">{description}</p>
       <div className="mb-6">
-        <span className="text-3xl font-black text-white">{price}</span>
-        <span className="text-sm text-white/60">{period}</span>
+        <span className="text-3xl font-black">{price}</span>
+        <span className="text-sm text-muted-foreground">{period}</span>
       </div>
       <ul className="space-y-2.5 mb-8 flex-1">
         {features.map((f, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-white/70">
-            <Check className="w-4 h-4 text-white mt-0.5 shrink-0" />
+          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+            <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
             {f}
           </li>
         ))}
@@ -359,8 +359,8 @@ function PricingCard({ name, price, period, description, features, cta, highligh
         to="/login"
         className={`w-full py-2.5 rounded-lg text-sm font-semibold text-center transition-colors ${
           highlighted 
-            ? 'bg-white text-[hsl(207,90%,48%)] hover:bg-white/90' 
-            : 'border border-white/30 text-white hover:bg-white/10'
+            ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+            : 'border border-border text-foreground hover:bg-muted'
         }`}
       >
         {cta}
