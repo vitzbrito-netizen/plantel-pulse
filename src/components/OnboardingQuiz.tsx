@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { CheckCircle, ChevronRight, ArrowLeft, Shield, Users, User } from 'lucide-react';
-import { useAssignRole, AppRole } from '@/hooks/useUserRole';
-import { toast } from 'sonner';
+import type { AppRole } from '@/hooks/useUserRole';
 
 const questions = [
   {
