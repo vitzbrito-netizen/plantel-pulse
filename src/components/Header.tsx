@@ -183,14 +183,21 @@ export function Header() {
   );
 }
 
-function StatBadge({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: number; color?: string }) {
+function StatBadge({ icon, label, value, color, tooltip }: { icon: React.ReactNode; label: string; value: number; color?: string; tooltip?: string }) {
   return (
-    <div className="flex items-center gap-2 bg-card/50 border border-border rounded px-2.5 py-1.5">
-      <span className="text-muted-foreground">{icon}</span>
-      <div className="text-right">
-        <p className="text-[11px] text-muted-foreground uppercase">{label}</p>
-        <p className={`text-[20px] font-bold font-mono leading-none ${color || 'text-foreground'}`}>{value}</p>
-      </div>
-    </div>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center gap-2 bg-card/50 border border-border rounded px-2.5 py-1.5 cursor-default">
+            <span className="text-muted-foreground">{icon}</span>
+            <div className="text-right">
+              <p className="text-[11px] text-muted-foreground uppercase">{label}</p>
+              <p className={`text-[20px] font-bold font-mono leading-none ${color || 'text-foreground'}`}>{value}</p>
+            </div>
+          </div>
+        </TooltipTrigger>
+        {tooltip && <TooltipContent><p className="text-xs">{tooltip}</p></TooltipContent>}
+      </Tooltip>
+    </TooltipProvider>
   );
 }
