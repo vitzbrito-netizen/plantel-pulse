@@ -8,6 +8,7 @@ import { PulseCheckTab } from '@/components/tabs/PulseCheckTab';
 import { EmployeeSidebar } from '@/components/EmployeeSidebar';
 import { CPOPanel } from '@/components/CPOPanel';
 import { Employee } from '@/data/employees';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Users, Zap, DollarSign, Bell, BarChart3 } from 'lucide-react';
 
 type Tab = 'equipe' | 'dinamica' | 'orcamento' | 'noticias' | 'pulse';
@@ -24,6 +25,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<Tab>('equipe');
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
   const [cpoEmployee, setCpoEmployee] = useState<Employee | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -64,8 +66,8 @@ const Index = () => {
           {activeTab === 'pulse' && <PulseCheckTab activeSubTab="Semanal" />}
         </div>
 
-        {/* Employee detail sidebar */}
-        {selectedEmployee && !cpoEmployee && (
+        {/* Employee detail sidebar — full overlay on mobile */}
+        {selectedEmployee && !cpoEmployee && !isMobile && (
           <EmployeeSidebar
             employee={selectedEmployee}
             onClose={() => setSelectedEmployee(null)}
@@ -73,6 +75,17 @@ const Index = () => {
           />
         )}
       </div>
+
+      {/* Mobile: full-screen overlay sidebar */}
+      {selectedEmployee && !cpoEmployee && isMobile && (
+        <div className="fixed inset-0 z-50 bg-background overflow-y-auto">
+          <EmployeeSidebar
+            employee={selectedEmployee}
+            onClose={() => setSelectedEmployee(null)}
+            onCPO={(emp) => { setCpoEmployee(emp); setSelectedEmployee(null); }}
+          />
+        </div>
+      )}
 
       {/* CPO Panel */}
       {cpoEmployee && (

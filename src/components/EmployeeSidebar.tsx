@@ -42,7 +42,7 @@ export function EmployeeSidebar({ employee, onClose, onCPO }: Props) {
   ];
 
   return (
-    <div className="w-80 fm-sidebar h-full overflow-y-auto">
+    <div className="w-full md:w-80 fm-sidebar h-full overflow-y-auto">
       {/* Header — clear identity */}
       <div className="sticky top-0 bg-[#16162a] border-b border-border p-4 flex items-center justify-between z-10">
         <div className="flex items-center gap-3">
