@@ -12,21 +12,22 @@ export interface CompanyMember {
   created_at: string;
 }
 
-export function useCompanyMembers() {
+export function useCompanyMembers(companyIdOverride?: string) {
   const { data: profile } = useProfile();
+  const companyId = companyIdOverride ?? profile?.company_id;
 
   return useQuery({
-    queryKey: ['company-members', profile?.company_id],
+    queryKey: ['company-members', companyId],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('company_id', profile!.company_id!)
+        .eq('company_id', companyId!)
         .order('created_at', { ascending: true });
       if (error) throw error;
       return (data ?? []) as CompanyMember[];
     },
-    enabled: !!profile?.company_id,
+    enabled: !!companyId,
   });
 }
 
