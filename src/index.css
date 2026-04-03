@@ -212,7 +212,7 @@ html {
 
 .fm-subnav-item.active {
   color: hsl(240, 33%, 93%);
-  border-bottom-color: hsl(350, 63%, 40%);
+  border-bottom-color: hsl(207, 100%, 50%);
 }
 
 /* FM Sidebar Panel */
