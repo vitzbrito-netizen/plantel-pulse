@@ -52,16 +52,16 @@ export default function Landing() {
       {/* Hero */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-xs text-primary font-medium mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-white/20 rounded-full text-xs text-white font-medium mb-8">
             <Star className="w-3 h-3" />
             Plataforma #1 de Gestão de Pessoas para Saúde
           </div>
-          <h1 className="text-4xl md:text-6xl font-black leading-[1.1] mb-6">
+          <h1 className="text-4xl md:text-6xl font-black leading-[1.1] mb-6 text-white">
             Gerencie sua equipe<br />
             como um{' '}
-            <span className="text-primary">estrategista.</span>
+            <span className="text-white/80">estrategista.</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
             O Regiae transforma dados de RH em inteligência acionável. 
             Saiba quem está engajado, quem precisa de atenção e como otimizar seu time — 
             tudo em tempo real.
@@ -69,19 +69,19 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/login" 
-              className="bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
+              className="bg-white text-[hsl(207,90%,48%)] px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-white/90 transition-colors inline-flex items-center justify-center gap-2"
             >
               Começar Gratuitamente
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a 
               href="#features" 
-              className="border border-border text-foreground px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-card transition-colors inline-flex items-center justify-center gap-2"
+              className="border border-white/30 text-white px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2"
             >
               Ver Recursos
             </a>
           </div>
-          <p className="text-xs text-muted-foreground mt-4">
+          <p className="text-xs text-white/50 mt-4">
             Sem cartão de crédito · Setup em 5 minutos · Suporte incluso
           </p>
         </div>
