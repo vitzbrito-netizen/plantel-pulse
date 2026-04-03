@@ -259,15 +259,15 @@ export default function Landing() {
       {/* CTA */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Pronto para gerenciar como um estrategista?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <p className="text-white/60 mb-8 max-w-lg mx-auto">
             Junte-se a gestores que já transformaram sua forma de liderar equipes na saúde.
           </p>
           <Link 
             to="/login" 
-            className="bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
+            className="bg-white text-[hsl(207,90%,48%)] px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-white/90 transition-colors inline-flex items-center gap-2"
           >
             Criar Conta Gratuita
             <ArrowRight className="w-4 h-4" />
