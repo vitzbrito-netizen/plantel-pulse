@@ -31,17 +31,18 @@ export function useCompanyMembers(companyIdOverride?: string) {
   });
 }
 
-export function useTransferOwnership() {
+export function useTransferOwnership(companyIdOverride?: string) {
   const qc = useQueryClient();
   const { user } = useAuth();
   const { data: profile } = useProfile();
 
   return useMutation({
     mutationFn: async (targetUserId: string) => {
+      const companyId = companyIdOverride ?? profile!.company_id!;
       const { error } = await supabase.rpc('transfer_ownership', {
         _current_owner_id: user!.id,
         _new_owner_id: targetUserId,
-        _company_id: profile!.company_id!,
+        _company_id: companyId,
       });
       if (error) throw error;
     },
@@ -53,17 +54,18 @@ export function useTransferOwnership() {
   });
 }
 
-export function useRemoveMember() {
+export function useRemoveMember(companyIdOverride?: string) {
   const qc = useQueryClient();
   const { user } = useAuth();
   const { data: profile } = useProfile();
 
   return useMutation({
     mutationFn: async (targetUserId: string) => {
+      const companyId = companyIdOverride ?? profile!.company_id!;
       const { error } = await supabase.rpc('remove_member', {
         _actor_id: user!.id,
         _target_id: targetUserId,
-        _company_id: profile!.company_id!,
+        _company_id: companyId,
       });
       if (error) throw error;
     },
