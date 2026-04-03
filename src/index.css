@@ -224,7 +224,7 @@ html {
 /* FM Skill bars */
 .fm-skill-bar {
   height: 14px;
-  background: hsl(220, 25%, 18%);
+  background: hsl(210, 15%, 90%);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
