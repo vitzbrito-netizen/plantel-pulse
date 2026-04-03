@@ -371,12 +371,12 @@ function PricingCard({ name, price, period, description, features, cta, highligh
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   return (
-    <details className="group border border-border rounded-lg bg-card">
-      <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-foreground">
+    <details className="group border border-white/15 rounded-lg bg-white/10">
+      <summary className="flex items-center justify-between cursor-pointer px-5 py-4 text-sm font-medium text-white">
         {question}
-        <ChevronRight className="w-4 h-4 text-muted-foreground group-open:rotate-90 transition-transform" />
+        <ChevronRight className="w-4 h-4 text-white/50 group-open:rotate-90 transition-transform" />
       </summary>
-      <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">
+      <div className="px-5 pb-4 text-sm text-white/70 leading-relaxed">
         {answer}
       </div>
     </details>
