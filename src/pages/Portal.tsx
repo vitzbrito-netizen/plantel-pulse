@@ -1,14 +1,17 @@
 import { useAuth } from '@/contexts/AuthContext';
+import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useUserRole } from '@/hooks/useUserRole';
 import { OnboardingQuiz } from '@/components/OnboardingQuiz';
+import RoleBlocked from '@/pages/RoleBlocked';
 import { Loader2 } from 'lucide-react';
 import { lazy, Suspense, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import type { AppRole } from '@/hooks/useUserRole';
 
 const OwnerDashboard = lazy(() => import('./OwnerDashboard'));
 const ManagerDashboard = lazy(() => import('./ManagerDashboard'));
 const EmployeeDashboard = lazy(() => import('./EmployeeDashboard'));
-
-// Founder portal (existing) — imported directly since founders bypass quiz
 const FounderPortal = lazy(() => import('./FounderPortal'));
 
 const LoadingScreen = () => (
@@ -22,21 +25,52 @@ const LoadingScreen = () => (
 
 export default function Portal() {
   const { user } = useAuth();
-  const { data: role, isLoading } = useUserRole();
-  const [quizCompleted, setQuizCompleted] = useState(false);
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: legacyRole, isLoading: roleLoading } = useUserRole();
+  const updateProfile = useUpdateProfile();
+  const [quizBlocked, setQuizBlocked] = useState(false);
+  const [quizDone, setQuizDone] = useState(false);
 
+  const isLoading = profileLoading || roleLoading;
   if (isLoading) return <LoadingScreen />;
 
+  // Determine role: profile.role takes priority, fallback to legacy user_roles
+  const activeRole = profile?.role ?? legacyRole;
+
+  // Quiz blocked: user scored manager/employee without invite
+  if (quizBlocked && !activeRole) {
+    return <RoleBlocked onRestartQuiz={() => setQuizBlocked(false)} />;
+  }
+
   // No role yet → show quiz
-  if (!role && !quizCompleted) {
+  if (!activeRole && !quizDone) {
     return (
       <OnboardingQuiz
-        onComplete={() => setQuizCompleted(true)}
+        onComplete={async (determinedRole: AppRole) => {
+          if (determinedRole === 'manager' || determinedRole === 'employee') {
+            // Block: these roles require invite
+            setQuizBlocked(true);
+            return;
+          }
+
+          // Owner flow: assign role + create company
+          try {
+            // Set role on profile
+            await updateProfile.mutateAsync({ role: 'owner' });
+
+            // Also insert into user_roles for backward compat
+            await supabase
+              .from('user_roles')
+              .insert({ user_id: user!.id, role: 'owner' as any });
+
+            setQuizDone(true);
+          } catch (err: any) {
+            toast.error(err.message || 'Erro ao salvar perfil');
+          }
+        }}
       />
     );
   }
-
-  const activeRole = role;
 
   return (
     <Suspense fallback={<LoadingScreen />}>
@@ -49,7 +83,6 @@ export default function Portal() {
       ) : activeRole === 'employee' ? (
         <EmployeeDashboard />
       ) : (
-        // Fallback for just-completed quiz — refetch will kick in
         <LoadingScreen />
       )}
     </Suspense>

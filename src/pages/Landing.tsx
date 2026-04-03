@@ -267,10 +267,10 @@ export default function Landing() {
             Junte-se a gestores que já transformaram sua forma de liderar equipes na saúde.
           </p>
           <Link 
-            to="/login" 
+            to="/signup" 
             className="bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center gap-2"
           >
-            Criar Conta Gratuita
+            Criar minha empresa
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
