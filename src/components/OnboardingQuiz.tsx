@@ -85,8 +85,6 @@ export function OnboardingQuiz({ onComplete }: Props) {
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [result, setResult] = useState<AppRole | null>(null);
-  const [saving, setSaving] = useState(false);
-  const assignRole = useAssignRole();
 
   const progress = ((currentQ + 1) / questions.length) * 100;
 
