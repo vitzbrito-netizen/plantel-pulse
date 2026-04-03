@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { employees, teamStats } from '@/data/employees';
 import { ChevronDown, Users, TrendingUp, Heart, Settings, FileText, Calendar, Bell, HelpCircle, Search, ArrowLeft, LogOut } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface DropdownProps {
   label: string;
