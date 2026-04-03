@@ -175,11 +175,11 @@ html {
   color: hsl(0, 84%, 60%);
 }
 
-/* FM Dropdown Menu */
+/* Dropdown Menu */
 .fm-dropdown {
-  background: hsl(245, 33%, 14%);
-  border: 1px solid hsl(245, 25%, 22%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background: hsl(207, 80%, 35%);
+  border: 1px solid hsl(207, 60%, 50%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .fm-dropdown-item {
@@ -187,38 +187,38 @@ html {
 }
 
 .fm-dropdown-item:hover {
-  background-color: hsl(245, 25%, 20%);
+  background-color: hsl(207, 70%, 40%);
 }
 
-/* FM Sub-navigation */
+/* Sub-navigation */
 .fm-subnav {
-  background: hsl(245, 33%, 10%);
-  border-bottom: 1px solid hsl(245, 25%, 20%);
+  background: hsl(207, 85%, 35%);
+  border-bottom: 1px solid hsl(207, 60%, 50%);
 }
 
 .fm-subnav-item {
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 500;
-  color: hsl(240, 17%, 60%);
+  color: hsl(207, 30%, 80%);
   transition: all 0.15s ease;
   border-bottom: 2px solid transparent;
 }
 
 .fm-subnav-item:hover {
-  color: hsl(240, 33%, 93%);
-  background: hsl(245, 25%, 15%);
+  color: hsl(0, 0%, 100%);
+  background: hsl(207, 70%, 40%);
 }
 
 .fm-subnav-item.active {
-  color: hsl(240, 33%, 93%);
-  border-bottom-color: hsl(207, 100%, 50%);
+  color: hsl(0, 0%, 100%);
+  border-bottom-color: hsl(0, 0%, 100%);
 }
 
-/* FM Sidebar Panel */
+/* Sidebar Panel */
 .fm-sidebar {
-  background: hsl(245, 33%, 10%);
-  border-left: 1px solid hsl(245, 25%, 20%);
+  background: hsl(207, 85%, 35%);
+  border-left: 1px solid hsl(207, 60%, 50%);
 }
 
 /* FM Skill bars */
