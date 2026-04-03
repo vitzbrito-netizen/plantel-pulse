@@ -40,10 +40,10 @@ export default function Landing() {
               Entrar
             </Link>
             <Link 
-              to="/login" 
+              to="/signup" 
               className="bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
             >
-              Começar Agora
+              Criar Empresa
             </Link>
           </div>
         </div>
