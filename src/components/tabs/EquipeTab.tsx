@@ -44,6 +44,7 @@ function getRoleCategory(role: string): string {
 export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('ovr');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
+  const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [expandedSectors, setExpandedSectors] = useState<Record<string, boolean>>({
     'Analistas': true,
     'Técnicos': true,
