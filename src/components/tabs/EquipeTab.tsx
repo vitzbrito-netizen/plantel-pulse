@@ -115,7 +115,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
           onClick={() => onSelectEmployee(emp)}
           className={`fm-table-row cursor-pointer transition-colors hover:bg-muted/20 ${isSelected ? 'selected bg-primary/10' : ''}`}
         >
-          {/* Status dot — traffic light */}
+          {/* Status dot */}
           <td className="p-2.5">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -125,11 +125,14 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </Tooltip>
           </td>
 
-          {/* Name — larger, bolder */}
+          {/* Name */}
           <td className="p-2.5">
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-sm font-semibold text-foreground truncate block max-w-48">{emp.name}</span>
+                <div>
+                  <span className="text-sm font-semibold text-foreground truncate block max-w-48">{emp.name}</span>
+                  <span className="text-[11px] text-muted-foreground sm:hidden">{emp.role}</span>
+                </div>
               </TooltipTrigger>
               <TooltipContent side="top" className="max-w-64">
                 <p className="text-xs font-semibold">{emp.name}</p>
@@ -141,28 +144,13 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </Tooltip>
           </td>
 
-          {/* Role */}
-          <td className="p-2.5 text-xs text-muted-foreground truncate max-w-40">{emp.role}</td>
-
-          {/* Tier — color badge */}
-          <td className="p-2.5">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className={`tier-badge text-[11px] ${getTierBadgeClass(emp.tier)}`}>
-                  {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
-                </span>
-              </TooltipTrigger>
-              <TooltipContent><p className="text-xs">{tierDesc}</p></TooltipContent>
-            </Tooltip>
-          </td>
-
-          {/* OVR — big number, color-coded */}
+          {/* OVR */}
           <td className="p-2.5">
             <span className={`font-mono font-bold text-base ${getOvrClass(emp.ovr)}`}>{emp.ovr}</span>
           </td>
 
-          {/* Morale — visual bar + number */}
-          <td className="p-2.5">
+          {/* Morale — hidden on mobile */}
+          <td className="p-2.5 hidden sm:table-cell">
             <div className="flex items-center gap-2">
               <div className="flex-1 h-3 morale-bar-track rounded-sm overflow-hidden min-w-16">
                 <div 
@@ -176,22 +164,37 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </div>
           </td>
 
-          {/* Shift */}
-          <td className="p-2.5">
+          {/* Role — hidden on mobile */}
+          <td className="p-2.5 text-xs text-muted-foreground truncate max-w-40 hidden md:table-cell">{emp.role}</td>
+
+          {/* Tier — hidden on mobile */}
+          <td className="p-2.5 hidden sm:table-cell">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className={`tier-badge text-[11px] ${getTierBadgeClass(emp.tier)}`}>
+                  {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">{tierDesc}</p></TooltipContent>
+            </Tooltip>
+          </td>
+
+          {/* Shift — hidden on mobile */}
+          <td className="p-2.5 hidden md:table-cell">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               {turnoIcon}
               <span className="text-xs">{emp.turno === 'Noturno' ? 'NOT' : emp.turno === 'Integral' ? 'INT' : 'DIA'}</span>
             </span>
           </td>
 
-          {/* Contract — urgency color */}
-          <td className="p-2.5">
+          {/* Contract — hidden on mobile */}
+          <td className="p-2.5 hidden md:table-cell">
             <span className={`text-xs font-mono font-semibold ${days <= 30 ? 'text-urgente' : expiring ? 'text-atencao' : 'text-muted-foreground'}`}>
               {days <= 0 ? 'VENC!' : `${days}d`}
             </span>
           </td>
 
-          {/* Flight risk — big icon */}
+          {/* Flight risk */}
           <td className="p-2.5">
             {emp.flightRisk && (
               <Tooltip>
@@ -208,30 +211,32 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
   };
 
   return (
-    <div className="flex gap-4 h-full">
+    <div className="flex flex-col lg:flex-row gap-4 h-full">
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar: search + view toggle + summary */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
           {/* Search */}
-          <div className="relative flex-1 max-w-xs">
+          <div className="relative flex-1 min-w-[180px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Buscar colaborador..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors"
+              className="w-full pl-9 pr-3 py-2.5 text-sm bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors"
             />
           </div>
 
-          {/* Quick stats */}
-          <QuickStat icon={<Trophy className="w-3.5 h-3.5 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Peças-chave da equipe" />
-          <QuickStat icon={<TrendingUp className="w-3.5 h-3.5 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Alto desempenho" />
-          {flightRisks > 0 && (
-            <QuickStat icon={<AlertTriangle className="w-3.5 h-3.5 text-urgente" />} label="Risco" value={flightRisks} color="text-urgente" tooltip="Risco de saída" />
-          )}
+          {/* Quick stats — hidden on small screens */}
+          <div className="hidden sm:flex items-center gap-2">
+            <QuickStat icon={<Trophy className="w-3.5 h-3.5 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Peças-chave da equipe" />
+            <QuickStat icon={<TrendingUp className="w-3.5 h-3.5 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Alto desempenho" />
+            {flightRisks > 0 && (
+              <QuickStat icon={<AlertTriangle className="w-3.5 h-3.5 text-urgente" />} label="Risco" value={flightRisks} color="text-urgente" tooltip="Risco de saída" />
+            )}
+          </div>
           
-          <div className="flex-1" />
+          <div className="flex-1 hidden sm:block" />
 
           {/* View toggle */}
           <div className="flex items-center bg-muted/40 rounded-lg p-0.5 gap-0.5">
@@ -240,14 +245,14 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
               className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${viewMode === 'table' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
             >
               <List className="w-4 h-4" />
-              Tabela
+              <span className="hidden sm:inline">Tabela</span>
             </button>
             <button
               onClick={() => setViewMode('cards')}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${viewMode === 'cards' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
             >
               <LayoutGrid className="w-4 h-4" />
-              Cards
+              <span className="hidden sm:inline">Cards</span>
             </button>
           </div>
 
@@ -266,17 +271,17 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             <div className="overflow-auto max-h-[calc(100vh-240px)]">
               <table className="w-full">
                 <thead className="bg-muted/30 sticky top-0">
-                  <tr>
-                    <th className="w-8 p-2.5" />
-                    <SortHeader label="Nome" sortKeyProp="name" width="w-48" tooltip="Nome do colaborador" />
-                    <SortHeader label="Cargo" sortKeyProp="role" width="w-40" tooltip="Função no laboratório" />
-                    <SortHeader label="Tier" sortKeyProp="tier" width="w-20" tooltip="Nível de importância: LID (Líder), INF (Influente), PRO (Promessa)" />
-                    <SortHeader label="OVR" sortKeyProp="ovr" width="w-16" tooltip="Overall Rating — Nota geral (0-100)" />
-                    <th className="text-left p-2.5 text-xs font-semibold text-muted-foreground uppercase w-28">Moral</th>
-                    <SortHeader label="Turno" sortKeyProp="turno" width="w-20" tooltip="DIA = Diurno, NOT = Noturno, INT = Integral" />
-                    <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" tooltip="Dias restantes até vencimento" />
-                    <th className="w-10 p-2.5" />
-                  </tr>
+                   <tr>
+                     <th className="w-8 p-2.5" />
+                     <SortHeader label="Nome" sortKeyProp="name" width="min-w-[120px]" tooltip="Nome do colaborador" />
+                     <SortHeader label="OVR" sortKeyProp="ovr" width="w-16" tooltip="Overall Rating — Nota geral (0-100)" />
+                     <th className="text-left p-2.5 text-xs font-semibold text-muted-foreground uppercase w-28 hidden sm:table-cell">Moral</th>
+                     <SortHeader label="Cargo" sortKeyProp="role" width="w-40 hidden md:table-cell" tooltip="Função no laboratório" />
+                     <SortHeader label="Tier" sortKeyProp="tier" width="w-20 hidden sm:table-cell" tooltip="Nível de importância: LID (Líder), INF (Influente), PRO (Promessa)" />
+                     <SortHeader label="Turno" sortKeyProp="turno" width="w-20 hidden md:table-cell" tooltip="DIA = Diurno, NOT = Noturno, INT = Integral" />
+                     <SortHeader label="Contrato" sortKeyProp="contract" width="w-20 hidden md:table-cell" tooltip="Dias restantes até vencimento" />
+                     <th className="w-10 p-2.5" />
+                   </tr>
                 </thead>
                 <tbody>
                   {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
@@ -285,7 +290,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-240px)] flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-240px)] flex-1">
             {sortedEmployees.map(emp => (
               <EmployeeCard key={emp.id} employee={emp} onClick={onSelectEmployee} />
             ))}
@@ -295,7 +300,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
 
       {/* Right sidebar — analytics summary */}
       {!selectedEmployee && (
-        <div className="w-60 shrink-0 space-y-3">
+        <div className="hidden lg:block w-60 shrink-0 space-y-3">
           <div className="fm-card rounded-lg p-4">
             <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase text-muted-foreground mb-3">
               <Trophy className="w-4 h-4 text-tier-lider" /> Destaque do Mês
