@@ -243,29 +243,37 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
             </div>
           </div>
 
-          <div className="fm-card rounded overflow-hidden flex-1">
-            <div className="overflow-auto max-h-[calc(100vh-220px)]">
-              <table className="w-full text-xs">
-                <thead className="bg-muted/30 sticky top-0">
-                  <tr>
-                    <th className="w-6 p-2"></th>
-                    <SortHeader label="Nome" sortKeyProp="name" width="w-44" />
-                    <SortHeader label="Cargo" sortKeyProp="role" width="w-40" />
-                    <SortHeader label="Tier" sortKeyProp="tier" width="w-20" />
-                    <SortHeader label="OVR" sortKeyProp="ovr" width="w-14" />
-                    <th className="text-left p-2 text-[12px] font-semibold text-muted-foreground uppercase w-28">Moral</th>
-                    <SortHeader label="Turno" sortKeyProp="turno" width="w-20" />
-                    <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" />
-                    <SortHeader label="Salário" sortKeyProp="salary" width="w-24" />
-                    <th className="w-8 p-2"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
-                </tbody>
-              </table>
+          {viewMode === 'table' ? (
+            <div className="fm-card rounded overflow-hidden flex-1">
+              <div className="overflow-auto max-h-[calc(100vh-220px)]">
+                <table className="w-full text-xs">
+                  <thead className="bg-muted/30 sticky top-0">
+                    <tr>
+                      <th className="w-6 p-2"></th>
+                      <SortHeader label="Nome" sortKeyProp="name" width="w-44" />
+                      <SortHeader label="Cargo" sortKeyProp="role" width="w-40" />
+                      <SortHeader label="Tier" sortKeyProp="tier" width="w-20" />
+                      <SortHeader label="OVR" sortKeyProp="ovr" width="w-14" />
+                      <th className="text-left p-2 text-[12px] font-semibold text-muted-foreground uppercase w-28">Moral</th>
+                      <SortHeader label="Turno" sortKeyProp="turno" width="w-20" />
+                      <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" />
+                      <SortHeader label="Salário" sortKeyProp="salary" width="w-24" />
+                      <th className="w-8 p-2"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-auto max-h-[calc(100vh-220px)] flex-1">
+              {sortedEmployees.map(emp => (
+                <EmployeeCard key={emp.id} employee={emp} onClick={onSelectEmployee} />
+              ))}
+            </div>
+          )}
         </div>
 
         {!selectedEmployee && (
