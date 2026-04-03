@@ -1,5 +1,5 @@
 import { Employee, getInitials, getMoraleColor, getMoraleLabel, getTierColor, isContractExpiring, daysUntilExpiry } from '@/data/employees';
-import { AlertTriangle, Flame, Clock, Moon, Sun, Zap } from 'lucide-react';
+import { AlertTriangle, Flame, Clock, Moon, Sun, Zap, CircleDashed } from 'lucide-react';
 
 interface Props {
   employee: Employee;
@@ -19,7 +19,13 @@ export function EmployeeCard({ employee, onClick }: Props) {
       className="employee-card bg-card rounded-lg border p-4 cursor-pointer relative"
     >
       {/* Warning icons */}
-      <div className="absolute top-2 right-2 flex gap-1">
+      <div className="absolute top-2 right-2 flex items-center gap-1">
+        {employee.pendingFields && employee.pendingFields.length > 0 && (
+          <span className="flex items-center gap-0.5 text-[9px] font-medium text-muted-foreground/60 bg-muted/40 px-1.5 py-0.5 rounded-full" title={`Dados estimados: ${employee.pendingFields.join(', ')}`}>
+            <CircleDashed className="w-3 h-3" />
+            Standby
+          </span>
+        )}
         {employee.flightRisk && <Flame className="w-4 h-4 text-urgente pulse-urgente" />}
         {expiring && <AlertTriangle className="w-4 h-4" style={{ color: urgentExpiry ? 'hsl(var(--urgente))' : 'hsl(var(--atencao))' }} />}
       </div>
