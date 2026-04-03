@@ -29,7 +29,11 @@ export interface Employee {
   flightRisk: boolean;
   notes?: string;
   birthday?: string;
+  /** Campos ainda não confirmados com dados reais */
+  pendingFields?: string[];
 }
+
+export const STANDBY_FIELDS = ['morale', 'salary', 'contractEnd', 'skills', 'fitness', 'form', 'afinidades', 'tensoes'] as const;
 
 export const employees: Employee[] = [
   {
@@ -39,6 +43,7 @@ export const employees: Employee[] = [
     fitness: 90, form: 85, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1986-09-18',
     notes: 'Solteira. 2 filhos (aniversários: 17/02 e 02/06). Corinthians. Reconhecimento preferido: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '2', clientId: 'excelencia', name: 'Paulo Cardoso', role: 'Técnico de Laboratório', tier: 'Líder',
@@ -47,6 +52,7 @@ export const employees: Employee[] = [
     fitness: 82, form: 78, afinidades: ['Sabrina de Souza Andrade'], tensoes: [], flightRisk: false,
     birthday: '1986-03-02',
     notes: 'Casado com Sabrina (17/09/2021). 3 filhos: Kauan, João, Mellyna. Palmeiras. Quer ser analista. Especialidade: análise de urina. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '3', clientId: 'excelencia', name: 'Adilene Dias de Souza', role: 'Técnico de Laboratório', tier: 'Líder',
@@ -55,6 +61,7 @@ export const employees: Employee[] = [
     fitness: 88, form: 90, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1982-06-27',
     notes: 'Solteira. 2 filhos. Corinthians. Especialidade: coleta RN (recém-nascido). Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '4', clientId: 'excelencia', name: 'Irani de Souza Anjos', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -63,6 +70,7 @@ export const employees: Employee[] = [
     fitness: 78, form: 74, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1980-09-11',
     notes: 'Solteira. Sem filhos. Flamengo. Comida favorita: estrogonofe. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '5', clientId: 'excelencia', name: 'Robert Bispo Meneses', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -71,6 +79,7 @@ export const employees: Employee[] = [
     fitness: 75, form: 70, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1998-09-16',
     notes: 'Solteiro. Sem filhos. Hobbies: jogos, cinema, cachoeira. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '6', clientId: 'excelencia', name: 'Nayara Cristina', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -79,6 +88,7 @@ export const employees: Employee[] = [
     fitness: 72, form: 68, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1994-09-17',
     notes: 'Solteira. 1 filha. Academia e leitura. Conquista: carro próprio. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '7', clientId: 'excelencia', name: 'Sabrina de Souza Andrade', role: 'Recepcionista', tier: 'Influente',
@@ -87,6 +97,7 @@ export const employees: Employee[] = [
     fitness: 80, form: 72, afinidades: ['Paulo Cardoso'], tensoes: [], flightRisk: false,
     birthday: '1999-09-20',
     notes: 'Casada com Paulo (17/09/2021). Filha: Mellyna (07/07/2024). Flamengo. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '8', clientId: 'excelencia', name: 'Gabriela Helena Santos', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -95,6 +106,7 @@ export const employees: Employee[] = [
     fitness: 82, form: 76, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1998-01-20',
     notes: 'Casada (27/06/2023). 2 filhos. Artesanato e animais. Não precisa de reconhecimento formal.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '9', clientId: 'excelencia', name: 'Djandira Nascimento dos Santos', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -103,6 +115,7 @@ export const employees: Employee[] = [
     fitness: 70, form: 65, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1970-07-04',
     notes: 'Solteira. Sem filhos. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '10', clientId: 'excelencia', name: 'Rielia Avan Pereira Lobo', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -111,6 +124,7 @@ export const employees: Employee[] = [
     fitness: 78, form: 74, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1993-01-07',
     notes: 'União estável (jun/2024). Sem filhos. Leitura. Coletadora excelente. Ensina: coleta infantil e libras. Reconhecimento: elogio público.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '11', clientId: 'excelencia', name: 'Bianca Cardoso', role: 'Recepcionista', tier: 'Influente',
@@ -119,6 +133,7 @@ export const employees: Employee[] = [
     fitness: 82, form: 78, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1998-08-18',
     notes: 'Casada (out/2021). 1 filho. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '12', clientId: 'excelencia', name: 'Willow Albuquerque Santos Costa', role: 'Técnico de Laboratório', tier: 'Influente',
@@ -127,6 +142,7 @@ export const employees: Employee[] = [
     fitness: 68, form: 60, afinidades: [], tensoes: [], flightRisk: true,
     birthday: '1994-05-20',
     notes: 'Mora junto. 2 filhos. Flamengo. Jogos, esporte, família. Reconhecimento: elogio público. RISCO DE FUGA.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '13', clientId: 'excelencia', name: 'Lorraine Cristina Alves Ferreira', role: 'Técnico de Laboratório Jr', tier: 'Promessa',
@@ -135,6 +151,7 @@ export const employees: Employee[] = [
     fitness: 88, form: 82, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '2001-01-01',
     notes: 'Solteira. Sem filhos. Flamengo. Conquista: graduação. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '14', clientId: 'excelencia', name: 'Maria Eduarda Bodas', role: 'Técnico de Laboratório Jr', tier: 'Promessa',
@@ -143,6 +160,7 @@ export const employees: Employee[] = [
     fitness: 85, form: 78, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1998-06-27',
     notes: 'Solteira. Sem filhos. Vasco. Academia, natação, séries. Conquista: analista de laboratório. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '15', clientId: 'excelencia', name: 'Erick Vinicius Aragão Guerra', role: 'Técnico de Laboratório Jr', tier: 'Promessa',
@@ -151,13 +169,15 @@ export const employees: Employee[] = [
     fitness: 90, form: 85, afinidades: [], tensoes: [], flightRisk: false,
     birthday: '1996-03-01',
     notes: 'Casado (mar/2021). Sem filhos. Flamengo. Trilha, cachoeira, churrasco. Reconhecimento: folga.',
+    pendingFields: [...STANDBY_FIELDS],
   },
   {
     id: '16', clientId: 'excelencia', name: 'Colaborador 16', role: 'Recepcionista Jr', tier: 'Promessa',
     ovr: 58, morale: 70, salary: 2800, contractEnd: '2026-09-30', turno: 'Diurno',
     skills: { tecnica: 48, comunicacao: 72, lideranca: 40, disciplina: 60, trabalhoEmEquipe: 68, atendimento: 70 },
     fitness: 92, form: 88, afinidades: [], tensoes: [], flightRisk: false,
-    notes: 'Dados pendentes.',
+    notes: 'Todos os dados pendentes.',
+    pendingFields: ['name', 'birthday', ...STANDBY_FIELDS],
   },
 ];
 
