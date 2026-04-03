@@ -68,10 +68,10 @@ export default function Landing() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              to="/login" 
+              to="/signup" 
               className="bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors inline-flex items-center justify-center gap-2"
             >
-              Começar Gratuitamente
+              Criar minha empresa
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a 
@@ -82,7 +82,8 @@ export default function Landing() {
             </a>
           </div>
           <p className="text-xs text-muted-foreground mt-4">
-            Sem cartão de crédito · Setup em 5 minutos · Suporte incluso
+            <Link to="/invite" className="text-primary hover:underline">Entrar com convite</Link>
+            {' '}· Sem cartão de crédito · Setup em 5 minutos
           </p>
         </div>
       </section>
