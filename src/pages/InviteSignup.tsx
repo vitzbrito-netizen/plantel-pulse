@@ -93,29 +93,22 @@ export default function InviteSignup() {
       const newUserId = authData.user?.id;
       if (!newUserId) throw new Error('Erro ao criar usuário');
 
-      // 2. Update profile with role and company_id
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .update({
-          role: invite.role as any,
-          company_id: invite.company_id,
-          full_name: fullName,
-        })
-        .eq('user_id', newUserId);
-      if (profileError) throw profileError;
+      // 2. Wait briefly for the handle_new_user trigger to create the profile
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // 3. Insert into user_roles for backward compat
-      await supabase
-        .from('user_roles')
-        .insert({ user_id: newUserId, role: invite.role as any });
+      // 3. Use server-side function to atomically accept invite
+      const { error: acceptError } = await supabase.rpc('accept_invite', {
+        _user_id: newUserId,
+        _token: invite.token,
+      });
+      if (acceptError) throw acceptError;
 
-      // 4. Mark invite as used
-      await supabase
-        .from('invites')
-        .update({ used: true, used_by: newUserId } as any)
-        .eq('id', invite.id);
-
-      setSuccess('Conta criada! Verifique seu e-mail para confirmar.');
+      setSuccess('Conta criada com sucesso! Redirecionando...');
+      
+      // Auto-login and redirect
+      setTimeout(() => {
+        navigate('/portal');
+      }, 1500);
     } catch (err: any) {
       setError(err.message || 'Erro ao criar conta');
     } finally {
