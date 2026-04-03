@@ -25,23 +25,23 @@ export default function Landing() {
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-white/20 rounded flex items-center justify-center">
-              <span className="text-base font-bold text-white">R</span>
+            <div className="w-9 h-9 bg-primary rounded flex items-center justify-center">
+              <span className="text-base font-bold text-primary-foreground">R</span>
             </div>
-            <span className="text-lg font-bold tracking-tight text-white">REGIAE</span>
+            <span className="text-lg font-bold tracking-tight">REGIAE</span>
           </Link>
-          <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
-            <a href="#features" className="hover:text-white transition-colors">Recursos</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Planos</a>
-            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#features" className="hover:text-foreground transition-colors">Recursos</a>
+            <a href="#pricing" className="hover:text-foreground transition-colors">Planos</a>
+            <a href="#faq" className="hover:text-foreground transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-3">
-            <Link to="/login" className="text-sm text-white/70 hover:text-white transition-colors">
+            <Link to="/login" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Entrar
             </Link>
             <Link 
               to="/login" 
-              className="bg-white text-[hsl(207,90%,48%)] text-sm font-medium px-4 py-2 rounded hover:bg-white/90 transition-colors"
+              className="bg-primary text-primary-foreground text-sm font-medium px-4 py-2 rounded hover:bg-primary/90 transition-colors"
             >
               Começar Agora
             </Link>
