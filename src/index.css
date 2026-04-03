@@ -6,39 +6,39 @@
 
 @layer base {
   :root {
-    /* FM2026 Dark Theme */
-    --background: 245 27% 7%; /* #0e0e18 */
-    --foreground: 240 33% 93%; /* #e8e8f0 */
+    /* Blue Vibrant Theme */
+    --background: 207 90% 48%; /* vibrant blue */
+    --foreground: 0 0% 100%; /* white */
 
-    --card: 245 33% 12%; /* #16162a */
-    --card-foreground: 240 33% 93%; /* #e8e8f0 */
+    --card: 207 85% 42%; /* slightly darker blue */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 245 33% 12%;
-    --popover-foreground: 240 33% 93%;
+    --popover: 207 85% 38%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 207 100% 50%; /* #0a8ff0 vibrant blue */
+    --primary: 207 100% 30%; /* deep blue for buttons */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 245 25% 15%;
-    --secondary-foreground: 240 33% 93%;
+    --secondary: 207 70% 55%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 245 25% 18%;
-    --muted-foreground: 240 17% 60%; /* #8888aa */
+    --muted: 207 60% 40%;
+    --muted-foreground: 207 30% 80%;
 
-    --accent: 207 100% 50%;
+    --accent: 207 100% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 240 33% 93%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 245 25% 20%; /* #2a2a40 */
-    --input: 245 25% 20%;
-    --ring: 207 100% 50%;
+    --border: 207 60% 55%; /* blue border */
+    --input: 207 60% 45%;
+    --ring: 207 100% 70%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    /* FM Header */
-    --header: 245 33% 5%; /* #0a0a14 */
+    /* Header */
+    --header: 207 90% 38%; /* darker blue header */
 
     /* Tier colors - FM gold/silver/bronze style */
     --tier-lider: 43 96% 56%;
