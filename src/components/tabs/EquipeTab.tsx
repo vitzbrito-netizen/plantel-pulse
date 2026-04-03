@@ -300,7 +300,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
 
       {/* Right sidebar — analytics summary */}
       {!selectedEmployee && (
-        <div className="w-60 shrink-0 space-y-3">
+        <div className="hidden lg:block w-60 shrink-0 space-y-3">
           <div className="fm-card rounded-lg p-4">
             <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase text-muted-foreground mb-3">
               <Trophy className="w-4 h-4 text-tier-lider" /> Destaque do Mês
