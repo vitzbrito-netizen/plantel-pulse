@@ -8,6 +8,7 @@ import { PulseCheckTab } from '@/components/tabs/PulseCheckTab';
 import { EmployeeSidebar } from '@/components/EmployeeSidebar';
 import { CPOPanel } from '@/components/CPOPanel';
 import { Employee } from '@/data/employees';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { Users, Zap, DollarSign, Bell, BarChart3 } from 'lucide-react';
 
 type Tab = 'equipe' | 'dinamica' | 'orcamento' | 'noticias' | 'pulse';
