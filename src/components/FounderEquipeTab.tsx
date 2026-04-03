@@ -235,6 +235,8 @@ export default function FounderEquipeTab({ clients }: Props) {
           </div>
         </div>
       )}
+      </>
+      )}
 
       {/* Modal */}
       <Dialog open={modalOpen} onOpenChange={(open) => { if (!open) resetModal(); }}>
