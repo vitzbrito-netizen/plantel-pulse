@@ -211,27 +211,29 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
     <div className="flex flex-col lg:flex-row gap-4 h-full">
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar: search + view toggle + summary */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
           {/* Search */}
-          <div className="relative flex-1 max-w-xs">
+          <div className="relative flex-1 min-w-[180px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Buscar colaborador..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-sm bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors"
+              className="w-full pl-9 pr-3 py-2.5 text-sm bg-card border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-colors"
             />
           </div>
 
-          {/* Quick stats */}
-          <QuickStat icon={<Trophy className="w-3.5 h-3.5 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Peças-chave da equipe" />
-          <QuickStat icon={<TrendingUp className="w-3.5 h-3.5 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Alto desempenho" />
-          {flightRisks > 0 && (
-            <QuickStat icon={<AlertTriangle className="w-3.5 h-3.5 text-urgente" />} label="Risco" value={flightRisks} color="text-urgente" tooltip="Risco de saída" />
-          )}
+          {/* Quick stats — hidden on small screens */}
+          <div className="hidden sm:flex items-center gap-2">
+            <QuickStat icon={<Trophy className="w-3.5 h-3.5 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Peças-chave da equipe" />
+            <QuickStat icon={<TrendingUp className="w-3.5 h-3.5 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Alto desempenho" />
+            {flightRisks > 0 && (
+              <QuickStat icon={<AlertTriangle className="w-3.5 h-3.5 text-urgente" />} label="Risco" value={flightRisks} color="text-urgente" tooltip="Risco de saída" />
+            )}
+          </div>
           
-          <div className="flex-1" />
+          <div className="flex-1 hidden sm:block" />
 
           {/* View toggle */}
           <div className="flex items-center bg-muted/40 rounded-lg p-0.5 gap-0.5">
@@ -240,14 +242,14 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
               className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${viewMode === 'table' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
             >
               <List className="w-4 h-4" />
-              Tabela
+              <span className="hidden sm:inline">Tabela</span>
             </button>
             <button
               onClick={() => setViewMode('cards')}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium transition-colors ${viewMode === 'cards' ? 'bg-primary/20 text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
             >
               <LayoutGrid className="w-4 h-4" />
-              Cards
+              <span className="hidden sm:inline">Cards</span>
             </button>
           </div>
 
