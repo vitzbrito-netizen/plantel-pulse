@@ -137,16 +137,9 @@ export function OnboardingQuiz({ onComplete }: Props) {
           <p className="text-muted-foreground mb-8 max-w-sm mx-auto">{info.desc}</p>
           <button
             onClick={handleConfirm}
-            disabled={saving}
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition flex items-center gap-2 mx-auto disabled:opacity-50"
+            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition flex items-center gap-2 mx-auto"
           >
-            {saving ? (
-              <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <>
-                Continuar <ChevronRight className="w-4 h-4" />
-              </>
-            )}
+            Continuar <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
