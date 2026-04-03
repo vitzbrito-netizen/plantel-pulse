@@ -115,7 +115,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
           onClick={() => onSelectEmployee(emp)}
           className={`fm-table-row cursor-pointer transition-colors hover:bg-muted/20 ${isSelected ? 'selected bg-primary/10' : ''}`}
         >
-          {/* Status dot — traffic light */}
+          {/* Status dot */}
           <td className="p-2.5">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -125,11 +125,14 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </Tooltip>
           </td>
 
-          {/* Name — larger, bolder */}
+          {/* Name */}
           <td className="p-2.5">
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-sm font-semibold text-foreground truncate block max-w-48">{emp.name}</span>
+                <div>
+                  <span className="text-sm font-semibold text-foreground truncate block max-w-48">{emp.name}</span>
+                  <span className="text-[11px] text-muted-foreground sm:hidden">{emp.role}</span>
+                </div>
               </TooltipTrigger>
               <TooltipContent side="top" className="max-w-64">
                 <p className="text-xs font-semibold">{emp.name}</p>
@@ -141,28 +144,13 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </Tooltip>
           </td>
 
-          {/* Role */}
-          <td className="p-2.5 text-xs text-muted-foreground truncate max-w-40">{emp.role}</td>
-
-          {/* Tier — color badge */}
-          <td className="p-2.5">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className={`tier-badge text-[11px] ${getTierBadgeClass(emp.tier)}`}>
-                  {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
-                </span>
-              </TooltipTrigger>
-              <TooltipContent><p className="text-xs">{tierDesc}</p></TooltipContent>
-            </Tooltip>
-          </td>
-
-          {/* OVR — big number, color-coded */}
+          {/* OVR */}
           <td className="p-2.5">
             <span className={`font-mono font-bold text-base ${getOvrClass(emp.ovr)}`}>{emp.ovr}</span>
           </td>
 
-          {/* Morale — visual bar + number */}
-          <td className="p-2.5">
+          {/* Morale — hidden on mobile */}
+          <td className="p-2.5 hidden sm:table-cell">
             <div className="flex items-center gap-2">
               <div className="flex-1 h-3 morale-bar-track rounded-sm overflow-hidden min-w-16">
                 <div 
@@ -176,22 +164,37 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             </div>
           </td>
 
-          {/* Shift */}
-          <td className="p-2.5">
+          {/* Role — hidden on mobile */}
+          <td className="p-2.5 text-xs text-muted-foreground truncate max-w-40 hidden md:table-cell">{emp.role}</td>
+
+          {/* Tier — hidden on mobile */}
+          <td className="p-2.5 hidden sm:table-cell">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className={`tier-badge text-[11px] ${getTierBadgeClass(emp.tier)}`}>
+                  {emp.tier === 'Líder' ? 'LID' : emp.tier === 'Influente' ? 'INF' : 'PRO'}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent><p className="text-xs">{tierDesc}</p></TooltipContent>
+            </Tooltip>
+          </td>
+
+          {/* Shift — hidden on mobile */}
+          <td className="p-2.5 hidden md:table-cell">
             <span className="flex items-center gap-1.5 text-muted-foreground">
               {turnoIcon}
               <span className="text-xs">{emp.turno === 'Noturno' ? 'NOT' : emp.turno === 'Integral' ? 'INT' : 'DIA'}</span>
             </span>
           </td>
 
-          {/* Contract — urgency color */}
-          <td className="p-2.5">
+          {/* Contract — hidden on mobile */}
+          <td className="p-2.5 hidden md:table-cell">
             <span className={`text-xs font-mono font-semibold ${days <= 30 ? 'text-urgente' : expiring ? 'text-atencao' : 'text-muted-foreground'}`}>
               {days <= 0 ? 'VENC!' : `${days}d`}
             </span>
           </td>
 
-          {/* Flight risk — big icon */}
+          {/* Flight risk */}
           <td className="p-2.5">
             {emp.flightRisk && (
               <Tooltip>
