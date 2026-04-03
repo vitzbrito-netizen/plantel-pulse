@@ -652,13 +652,20 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
   return null;
 }
 
-function QuickStat({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: number; color?: string }) {
+function QuickStat({ icon, label, value, color, tooltip }: { icon: React.ReactNode; label: string; value: number; color?: string; tooltip?: string }) {
   return (
-    <div className="flex items-center gap-1.5 bg-card/50 border border-border rounded px-2.5 py-1.5">
-      {icon}
-      <span className="text-[12px] text-muted-foreground">{label}:</span>
-      <span className={`text-[13px] font-bold font-mono ${color || 'text-foreground'}`}>{value}</span>
-    </div>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex items-center gap-1.5 bg-card/50 border border-border rounded px-2.5 py-1.5 cursor-default">
+            {icon}
+            <span className="text-[12px] text-muted-foreground">{label}:</span>
+            <span className={`text-[13px] font-bold font-mono ${color || 'text-foreground'}`}>{value}</span>
+          </div>
+        </TooltipTrigger>
+        {tooltip && <TooltipContent><p className="text-xs">{tooltip}</p></TooltipContent>}
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 
