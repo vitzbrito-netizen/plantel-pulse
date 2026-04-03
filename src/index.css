@@ -177,9 +177,9 @@ html {
 
 /* Dropdown Menu */
 .fm-dropdown {
-  background: hsl(220, 30%, 14%);
-  border: 1px solid hsl(220, 25%, 22%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(210, 15%, 90%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .fm-dropdown-item {
@@ -187,38 +187,38 @@ html {
 }
 
 .fm-dropdown-item:hover {
-  background-color: hsl(220, 25%, 20%);
+  background-color: hsl(210, 20%, 96%);
 }
 
 /* Sub-navigation */
 .fm-subnav {
-  background: hsl(220, 30%, 10%);
-  border-bottom: 1px solid hsl(220, 25%, 20%);
+  background: hsl(0, 0%, 100%);
+  border-bottom: 1px solid hsl(210, 15%, 90%);
 }
 
 .fm-subnav-item {
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 500;
-  color: hsl(215, 15%, 60%);
+  color: hsl(215, 10%, 45%);
   transition: all 0.15s ease;
   border-bottom: 2px solid transparent;
 }
 
 .fm-subnav-item:hover {
-  color: hsl(210, 20%, 93%);
-  background: hsl(220, 25%, 16%);
+  color: hsl(220, 25%, 12%);
+  background: hsl(210, 20%, 96%);
 }
 
 .fm-subnav-item.active {
-  color: hsl(210, 20%, 93%);
+  color: hsl(207, 100%, 50%);
   border-bottom-color: hsl(207, 100%, 50%);
 }
 
 /* Sidebar Panel */
 .fm-sidebar {
-  background: hsl(220, 30%, 10%);
-  border-left: 1px solid hsl(220, 25%, 20%);
+  background: hsl(0, 0%, 100%);
+  border-left: 1px solid hsl(210, 15%, 90%);
 }
 
 /* FM Skill bars */
