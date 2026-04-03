@@ -208,7 +208,7 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
   };
 
   return (
-    <div className="flex gap-4 h-full">
+    <div className="flex flex-col lg:flex-row gap-4 h-full">
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar: search + view toggle + summary */}
         <div className="flex items-center gap-3 mb-4">
