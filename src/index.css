@@ -59,13 +59,13 @@
     --ovr-low: 0 84% 60%;
 
     /* Sidebar */
-    --sidebar-background: 220 30% 10%;
-    --sidebar-foreground: 210 20% 93%;
+    --sidebar-background: 210 20% 97%;
+    --sidebar-foreground: 220 25% 12%;
     --sidebar-primary: 207 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 25% 18%;
-    --sidebar-accent-foreground: 210 20% 93%;
-    --sidebar-border: 220 25% 20%;
+    --sidebar-accent: 210 15% 92%;
+    --sidebar-accent-foreground: 220 25% 12%;
+    --sidebar-border: 210 15% 88%;
     --sidebar-ring: 207 100% 50%;
 
     font-family: 'Inter', sans-serif;
