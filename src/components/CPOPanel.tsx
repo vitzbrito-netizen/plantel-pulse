@@ -1,5 +1,12 @@
 import { Employee, getMoraleColor } from '@/data/employees';
-import { X, AlertTriangle, Target, MessageCircle, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
+import { X, AlertTriangle, Target, MessageCircle, Clock, CheckCircle2 } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 
 interface Props {
   employee: Employee;
@@ -87,17 +94,10 @@ function getCPOAdvice(emp: Employee) {
   };
 }
 
-export function CPOPanel({ employee, onClose }: Props) {
-  const advice = getCPOAdvice(employee);
-
+function CPOContent({ employee, advice, onClose, showHeader = true }: { employee: Employee; advice: ReturnType<typeof getCPOAdvice>; onClose: () => void; showHeader?: boolean }) {
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/60" />
-      <div
-        className="relative bg-card w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl rounded-xl border border-border"
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Header */}
+    <>
+      {showHeader && (
         <div className="sticky top-0 bg-header border-b border-border p-5 flex items-center justify-between z-10">
           <div className="flex items-center gap-4">
             <span className={`font-mono font-bold text-4xl ${getOvrClass(employee.ovr)}`}>
@@ -117,66 +117,114 @@ export function CPOPanel({ employee, onClose }: Props) {
             </button>
           </div>
         </div>
+      )}
 
-        <div className="p-5 space-y-5">
-          {/* Diagnosis — numbered, scannable */}
-          <div className="fm-card rounded-lg p-4">
-            <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
-              <AlertTriangle className="w-4 h-4 text-atencao" /> Diagnóstico
-            </h3>
-            <div className="space-y-2.5">
-              {advice.diagnosis.map((d, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <span className="w-5 h-5 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold text-muted-foreground shrink-0 mt-0.5">
-                    {i + 1}
-                  </span>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
-                </div>
-              ))}
-            </div>
+      <div className="p-5 space-y-5">
+        {/* Diagnosis */}
+        <div className="fm-card rounded-lg p-4">
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
+            <AlertTriangle className="w-4 h-4 text-atencao" /> Diagnóstico
+          </h3>
+          <div className="space-y-2.5">
+            {advice.diagnosis.map((d, i) => (
+              <div key={i} className="flex gap-3 items-start">
+                <span className="w-5 h-5 rounded-full bg-muted flex items-center justify-center text-[10px] font-bold text-muted-foreground shrink-0 mt-0.5">
+                  {i + 1}
+                </span>
+                <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+              </div>
+            ))}
           </div>
-
-          {/* Action Plan — step by step, McDonald's style */}
-          <div className="fm-card rounded-lg p-4">
-            <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
-              <Target className="w-4 h-4 text-primary" /> Faça Isso
-            </h3>
-            <div className="space-y-3">
-              {advice.actions.map((a, i) => (
-                <div key={i} className="bg-muted/20 rounded-lg p-3">
-                  <div className="flex items-start justify-between gap-3 mb-1.5">
-                    <div className="flex items-center gap-2.5">
-                      <span className="w-7 h-7 rounded-lg bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shrink-0">
-                        {i + 1}
-                      </span>
-                      <p className="text-sm font-bold">{a.step}</p>
-                    </div>
-                    <span className="flex items-center gap-1 text-xs text-primary bg-primary/10 px-2 py-1 rounded-lg shrink-0 font-semibold">
-                      <Clock className="w-3 h-3" /> {a.timeline}
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground ml-9">{a.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Script — copy-paste ready */}
-          <div className="fm-card rounded-lg p-4">
-            <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
-              <MessageCircle className="w-4 h-4 text-tier-influente" /> Fale Isso
-            </h3>
-            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-              <p className="text-sm italic leading-relaxed text-foreground">{advice.script}</p>
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-2">💡 Use esse texto como base para iniciar a conversa</p>
-          </div>
-
-          {/* Action button — big, obvious */}
-          <button className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 text-primary-foreground py-3.5 rounded-lg text-sm font-bold transition-colors">
-            <CheckCircle2 className="w-4 h-4" /> Entendido — Marcar como Lido
-          </button>
         </div>
+
+        {/* Action Plan */}
+        <div className="fm-card rounded-lg p-4">
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
+            <Target className="w-4 h-4 text-primary" /> Faça Isso
+          </h3>
+          <div className="space-y-3">
+            {advice.actions.map((a, i) => (
+              <div key={i} className="bg-muted/20 rounded-lg p-3">
+                <div className="flex items-start justify-between gap-3 mb-1.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-7 rounded-lg bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center shrink-0">
+                      {i + 1}
+                    </span>
+                    <p className="text-sm font-bold">{a.step}</p>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-primary bg-primary/10 px-2 py-1 rounded-lg shrink-0 font-semibold">
+                    <Clock className="w-3 h-3" /> {a.timeline}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground ml-9">{a.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Script */}
+        <div className="fm-card rounded-lg p-4">
+          <h3 className="flex items-center gap-2 text-xs font-bold uppercase text-muted-foreground mb-3">
+            <MessageCircle className="w-4 h-4 text-tier-influente" /> Fale Isso
+          </h3>
+          <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <p className="text-sm italic leading-relaxed text-foreground">{advice.script}</p>
+          </div>
+          <p className="text-[10px] text-muted-foreground mt-2">💡 Use esse texto como base para iniciar a conversa</p>
+        </div>
+
+        {/* Action button */}
+        <button
+          onClick={onClose}
+          className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 text-primary-foreground py-3.5 rounded-lg text-sm font-bold transition-colors"
+        >
+          <CheckCircle2 className="w-4 h-4" /> Entendido — Marcar como Lido
+        </button>
+      </div>
+    </>
+  );
+}
+
+export function CPOPanel({ employee, onClose }: Props) {
+  const advice = getCPOAdvice(employee);
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return (
+      <Drawer open onOpenChange={(open) => { if (!open) onClose(); }}>
+        <DrawerContent className="max-h-[90vh]">
+          <DrawerHeader className="pb-0">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className={`font-mono font-bold text-3xl ${getOvrClass(employee.ovr)}`}>
+                  {employee.ovr}
+                </span>
+                <div className="text-left">
+                  <DrawerTitle className="text-sm">{employee.name}</DrawerTitle>
+                  <p className="text-[10px] text-primary uppercase font-bold tracking-wider">O que fazer agora?</p>
+                </div>
+              </div>
+              <span className={`text-xs font-bold uppercase px-3 py-1.5 rounded-lg ${advice.riskClass}`}>
+                {advice.risk}
+              </span>
+            </div>
+          </DrawerHeader>
+          <div className="overflow-y-auto">
+            <CPOContent employee={employee} advice={advice} onClose={onClose} showHeader={false} />
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60" />
+      <div
+        className="relative bg-card w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl rounded-xl border border-border"
+        onClick={e => e.stopPropagation()}
+      >
+        <CPOContent employee={employee} advice={advice} onClose={onClose} />
       </div>
     </div>
   );
