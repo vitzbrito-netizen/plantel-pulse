@@ -167,10 +167,10 @@ export default function Landing() {
       <section id="pricing" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               Planos que crescem com você
             </h2>
-            <p className="text-muted-foreground">Comece grátis, escale quando precisar</p>
+            <p className="text-white/60">Comece grátis, escale quando precisar</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
