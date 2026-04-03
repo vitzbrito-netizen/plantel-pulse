@@ -146,13 +146,13 @@ export default function Landing() {
       </section>
 
       {/* How it works */}
-      <section className="py-24 px-6 bg-card/30 border-y border-border/50">
+      <section className="py-24 px-6 bg-white/5 border-y border-white/10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               Simples de começar
             </h2>
-            <p className="text-muted-foreground">Três passos para transformar sua gestão de pessoas</p>
+            <p className="text-white/60">Três passos para transformar sua gestão de pessoas</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
