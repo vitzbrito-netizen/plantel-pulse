@@ -3,7 +3,7 @@ import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useUserRole } from '@/hooks/useUserRole';
 import { OnboardingQuiz } from '@/components/OnboardingQuiz';
 import RoleBlocked from '@/pages/RoleBlocked';
-import { Loader2 } from 'lucide-react';
+import { Loader2, AlertTriangle } from 'lucide-react';
 import { lazy, Suspense, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
