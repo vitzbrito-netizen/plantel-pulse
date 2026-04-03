@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useInvites, useCreateInvite, useCancelInvite, useRegenerateInvite, getInviteStatus, Invite } from '@/hooks/useInvites';
 import { useProfile } from '@/hooks/useProfile';
 import { Users, Plus, Copy, Link2, Clock, CheckCircle2, XCircle, RefreshCw, Loader2, UserPlus, Mail } from 'lucide-react';
+import MemberManagement from '@/components/MemberManagement';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import {
