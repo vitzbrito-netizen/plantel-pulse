@@ -145,11 +145,14 @@ export function Header() {
             <span>Março 2026</span>
           </div>
           <div className="h-6 w-px bg-border mx-2" />
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center">
-              <span className="text-[10px] font-semibold text-primary">{userInitial}</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 bg-primary/20 border border-primary/30 rounded-full flex items-center justify-center">
+              <span className="text-xs font-semibold text-primary">{userInitial}</span>
             </div>
-            <span className="text-xs text-muted-foreground">{userEmail}</span>
+            <div className="hidden sm:block">
+              <p className="text-xs font-medium text-foreground leading-none">{userEmail}</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Founder</p>
+            </div>
           </div>
           <div className="h-6 w-px bg-border mx-1" />
           <button
