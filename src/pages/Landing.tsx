@@ -303,8 +303,8 @@ export default function Landing() {
 function StatItem({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <p className="text-2xl md:text-3xl font-black text-white">{value}</p>
-      <p className="text-xs text-white/60 mt-1">{label}</p>
+      <p className="text-2xl md:text-3xl font-black text-foreground">{value}</p>
+      <p className="text-xs text-muted-foreground mt-1">{label}</p>
     </div>
   );
 }
