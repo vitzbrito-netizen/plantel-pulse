@@ -268,17 +268,17 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee }: Props) {
             <div className="overflow-auto max-h-[calc(100vh-240px)]">
               <table className="w-full">
                 <thead className="bg-muted/30 sticky top-0">
-                  <tr>
-                    <th className="w-8 p-2.5" />
-                    <SortHeader label="Nome" sortKeyProp="name" width="w-48" tooltip="Nome do colaborador" />
-                    <SortHeader label="Cargo" sortKeyProp="role" width="w-40" tooltip="Função no laboratório" />
-                    <SortHeader label="Tier" sortKeyProp="tier" width="w-20" tooltip="Nível de importância: LID (Líder), INF (Influente), PRO (Promessa)" />
-                    <SortHeader label="OVR" sortKeyProp="ovr" width="w-16" tooltip="Overall Rating — Nota geral (0-100)" />
-                    <th className="text-left p-2.5 text-xs font-semibold text-muted-foreground uppercase w-28">Moral</th>
-                    <SortHeader label="Turno" sortKeyProp="turno" width="w-20" tooltip="DIA = Diurno, NOT = Noturno, INT = Integral" />
-                    <SortHeader label="Contrato" sortKeyProp="contract" width="w-20" tooltip="Dias restantes até vencimento" />
-                    <th className="w-10 p-2.5" />
-                  </tr>
+                   <tr>
+                     <th className="w-8 p-2.5" />
+                     <SortHeader label="Nome" sortKeyProp="name" width="min-w-[120px]" tooltip="Nome do colaborador" />
+                     <SortHeader label="OVR" sortKeyProp="ovr" width="w-16" tooltip="Overall Rating — Nota geral (0-100)" />
+                     <th className="text-left p-2.5 text-xs font-semibold text-muted-foreground uppercase w-28 hidden sm:table-cell">Moral</th>
+                     <SortHeader label="Cargo" sortKeyProp="role" width="w-40 hidden md:table-cell" tooltip="Função no laboratório" />
+                     <SortHeader label="Tier" sortKeyProp="tier" width="w-20 hidden sm:table-cell" tooltip="Nível de importância: LID (Líder), INF (Influente), PRO (Promessa)" />
+                     <SortHeader label="Turno" sortKeyProp="turno" width="w-20 hidden md:table-cell" tooltip="DIA = Diurno, NOT = Noturno, INT = Integral" />
+                     <SortHeader label="Contrato" sortKeyProp="contract" width="w-20 hidden md:table-cell" tooltip="Dias restantes até vencimento" />
+                     <th className="w-10 p-2.5" />
+                   </tr>
                 </thead>
                 <tbody>
                   {sortedEmployees.map(emp => <EmployeeRow key={emp.id} emp={emp} />)}
