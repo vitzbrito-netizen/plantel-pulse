@@ -289,16 +289,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(220, 30%, 10%);
+  background: hsl(0, 0%, 98%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(220, 25%, 25%);
+  background: hsl(210, 15%, 82%);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(220, 25%, 35%);
+  background: hsl(210, 15%, 70%);
 }
 
 /* Flight Risk icon pulse */
