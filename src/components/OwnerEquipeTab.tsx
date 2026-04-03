@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useInvites, useCreateInvite, useCancelInvite, useRegenerateInvite, getInviteStatus, Invite } from '@/hooks/useInvites';
 import { useProfile } from '@/hooks/useProfile';
 import { Users, Plus, Copy, Link2, Clock, CheckCircle2, XCircle, RefreshCw, Loader2, UserPlus, Mail } from 'lucide-react';
+import MemberManagement from '@/components/MemberManagement';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -103,7 +104,14 @@ export default function OwnerEquipeTab() {
         </button>
       </div>
 
-      {/* Invites table */}
+      {/* Members list */}
+      <div className="mb-8">
+        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">Membros</h3>
+        <MemberManagement />
+      </div>
+
+      {/* Invites section */}
+      <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">Convites</h3>
       {isLoading ? (
         <div className="flex items-center justify-center py-16">
           <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
