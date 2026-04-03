@@ -4,6 +4,7 @@ import { Client } from '@/hooks/useClients';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Users, Plus, Copy, Link2, Clock, CheckCircle2, XCircle, RefreshCw, Loader2, UserPlus, Mail, Building2 } from 'lucide-react';
+import MemberManagement from '@/components/MemberManagement';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import {
