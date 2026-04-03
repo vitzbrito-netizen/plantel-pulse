@@ -20,9 +20,9 @@ export default function Landing() {
   if (loading) return null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[hsl(207,90%,48%)] text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
+      <nav className="fixed top-0 w-full z-50 bg-[hsl(207,90%,48%)]/80 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-primary rounded flex items-center justify-center">
