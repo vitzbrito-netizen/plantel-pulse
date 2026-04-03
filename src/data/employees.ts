@@ -29,6 +29,8 @@ export interface Employee {
   flightRisk: boolean;
   notes?: string;
   birthday?: string;
+  /** Campos ainda não confirmados com dados reais */
+  pendingFields?: string[];
 }
 
 export const employees: Employee[] = [
