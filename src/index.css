@@ -6,39 +6,39 @@
 
 @layer base {
   :root {
-    /* Blue Vibrant Theme */
-    --background: 207 90% 48%; /* vibrant blue */
-    --foreground: 0 0% 100%; /* white */
+    /* Dark Theme */
+    --background: 220 25% 8%; /* dark navy */
+    --foreground: 210 20% 93%;
 
-    --card: 207 85% 42%; /* slightly darker blue */
-    --card-foreground: 0 0% 100%;
+    --card: 220 30% 13%;
+    --card-foreground: 210 20% 93%;
 
-    --popover: 207 85% 38%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 220 30% 13%;
+    --popover-foreground: 210 20% 93%;
 
-    --primary: 207 100% 30%; /* deep blue for buttons */
+    --primary: 207 100% 50%; /* vibrant blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 207 70% 55%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 220 25% 16%;
+    --secondary-foreground: 210 20% 93%;
 
-    --muted: 207 60% 40%;
-    --muted-foreground: 207 30% 80%;
+    --muted: 220 25% 18%;
+    --muted-foreground: 215 15% 60%;
 
-    --accent: 207 100% 60%;
+    --accent: 207 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 207 60% 55%; /* blue border */
-    --input: 207 60% 45%;
-    --ring: 207 100% 70%;
+    --border: 220 25% 20%;
+    --input: 220 25% 20%;
+    --ring: 207 100% 50%;
 
     --radius: 0.5rem;
 
     /* Header */
-    --header: 207 90% 38%; /* darker blue header */
+    --header: 220 30% 6%;
 
     /* Tier colors - FM gold/silver/bronze style */
     --tier-lider: 43 96% 56%;
