@@ -66,8 +66,8 @@ const Index = () => {
           {activeTab === 'pulse' && <PulseCheckTab activeSubTab="Semanal" />}
         </div>
 
-        {/* Employee detail sidebar */}
-        {selectedEmployee && !cpoEmployee && (
+        {/* Employee detail sidebar — full overlay on mobile */}
+        {selectedEmployee && !cpoEmployee && !isMobile && (
           <EmployeeSidebar
             employee={selectedEmployee}
             onClose={() => setSelectedEmployee(null)}
@@ -75,6 +75,17 @@ const Index = () => {
           />
         )}
       </div>
+
+      {/* Mobile: full-screen overlay sidebar */}
+      {selectedEmployee && !cpoEmployee && isMobile && (
+        <div className="fixed inset-0 z-50 bg-background overflow-y-auto">
+          <EmployeeSidebar
+            employee={selectedEmployee}
+            onClose={() => setSelectedEmployee(null)}
+            onCPO={(emp) => { setCpoEmployee(emp); setSelectedEmployee(null); }}
+          />
+        </div>
+      )}
 
       {/* CPO Panel */}
       {cpoEmployee && (
