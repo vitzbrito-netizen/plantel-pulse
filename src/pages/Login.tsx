@@ -2,19 +2,17 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
-import { Eye, EyeOff, LogIn, UserPlus, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, LogIn, ArrowLeft } from 'lucide-react';
 import ForgotPassword from '@/components/ForgotPassword';
 
 export default function Login() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState('');
   const [showForgot, setShowForgot] = useState(false);
 
   useEffect(() => {
@@ -26,23 +24,12 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
     setSubmitting(true);
 
     try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        navigate('/portal');
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: window.location.origin },
-        });
-        if (error) throw error;
-        setSuccess('Conta criada! Verifique seu e-mail para confirmar.');
-      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) throw error;
+      navigate('/portal');
     } catch (err: any) {
       setError(err.message === 'Invalid login credentials'
         ? 'E-mail ou senha incorretos'
@@ -57,7 +44,6 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-8">
       <div className="w-full max-w-sm">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-3 mb-8 justify-center group">
           <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
             <span className="text-lg font-bold text-primary-foreground">R</span>
@@ -70,12 +56,8 @@ export default function Login() {
         ) : (
           <>
             <div className="text-center mb-6">
-              <h2 className="text-lg font-bold text-foreground">
-                {isLogin ? 'Bem-vindo de volta' : 'Criar conta'}
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                {isLogin ? 'Acesse seu painel de gestão' : 'Comece a gerenciar sua equipe'}
-              </p>
+              <h2 className="text-lg font-bold text-foreground">Bem-vindo de volta</h2>
+              <p className="text-sm text-muted-foreground mt-1">Acesse seu painel de gestão</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -94,15 +76,13 @@ export default function Login() {
               <div>
                 <div className="flex items-center justify-between">
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Senha</label>
-                  {isLogin && (
-                    <button
-                      type="button"
-                      onClick={() => setShowForgot(true)}
-                      className="text-xs text-primary hover:text-primary/80 transition-colors"
-                    >
-                      Esqueceu?
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => setShowForgot(true)}
+                    className="text-xs text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Esqueceu?
+                  </button>
                 </div>
                 <div className="relative mt-1">
                   <input
@@ -130,12 +110,6 @@ export default function Login() {
                 </div>
               )}
 
-              {success && (
-                <div className="text-xs text-morale-high bg-morale-high/10 border border-morale-high/20 rounded px-3 py-2">
-                  {success}
-                </div>
-              )}
-
               <button
                 type="submit"
                 disabled={submitting}
@@ -143,27 +117,22 @@ export default function Login() {
               >
                 {submitting ? (
                   <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                ) : isLogin ? (
+                ) : (
                   <>
                     <LogIn className="w-4 h-4" />
                     Entrar
-                  </>
-                ) : (
-                  <>
-                    <UserPlus className="w-4 h-4" />
-                    Criar Conta
                   </>
                 )}
               </button>
             </form>
 
-            <div className="mt-4 text-center">
-              <button
-                onClick={() => { setIsLogin(!isLogin); setError(''); setSuccess(''); }}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {isLogin ? 'Não tem conta? Crie uma agora' : 'Já tem conta? Faça login'}
-              </button>
+            <div className="mt-4 text-center space-y-2">
+              <Link to="/signup" className="text-xs text-muted-foreground hover:text-foreground transition-colors block">
+                Não tem conta? Crie sua empresa
+              </Link>
+              <Link to="/invite" className="text-xs text-primary hover:text-primary/80 transition-colors block">
+                Entrar com link de convite
+              </Link>
             </div>
 
             <div className="mt-6 text-center">

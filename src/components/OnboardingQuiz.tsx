@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { CheckCircle, ChevronRight, ArrowLeft, Shield, Users, User } from 'lucide-react';
-import { useAssignRole, AppRole } from '@/hooks/useUserRole';
-import { toast } from 'sonner';
+import type { AppRole } from '@/hooks/useUserRole';
 
 const questions = [
   {
@@ -86,8 +85,6 @@ export function OnboardingQuiz({ onComplete }: Props) {
   const [answers, setAnswers] = useState<number[]>([]);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [result, setResult] = useState<AppRole | null>(null);
-  const [saving, setSaving] = useState(false);
-  const assignRole = useAssignRole();
 
   const progress = ((currentQ + 1) / questions.length) * 100;
 
@@ -120,17 +117,9 @@ export function OnboardingQuiz({ onComplete }: Props) {
     }
   };
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     if (!result) return;
-    setSaving(true);
-    try {
-      await assignRole.mutateAsync(result);
-      onComplete(result);
-    } catch (err: any) {
-      toast.error(err.message || 'Erro ao salvar perfil');
-    } finally {
-      setSaving(false);
-    }
+    onComplete(result);
   };
 
   // Result screen
@@ -148,16 +137,9 @@ export function OnboardingQuiz({ onComplete }: Props) {
           <p className="text-muted-foreground mb-8 max-w-sm mx-auto">{info.desc}</p>
           <button
             onClick={handleConfirm}
-            disabled={saving}
-            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition flex items-center gap-2 mx-auto disabled:opacity-50"
+            className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition flex items-center gap-2 mx-auto"
           >
-            {saving ? (
-              <div className="w-5 h-5 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <>
-                Continuar <ChevronRight className="w-4 h-4" />
-              </>
-            )}
+            Continuar <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
