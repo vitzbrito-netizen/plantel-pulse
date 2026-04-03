@@ -12,35 +12,37 @@ export interface CompanyMember {
   created_at: string;
 }
 
-export function useCompanyMembers() {
+export function useCompanyMembers(companyIdOverride?: string) {
   const { data: profile } = useProfile();
+  const companyId = companyIdOverride ?? profile?.company_id;
 
   return useQuery({
-    queryKey: ['company-members', profile?.company_id],
+    queryKey: ['company-members', companyId],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('company_id', profile!.company_id!)
+        .eq('company_id', companyId!)
         .order('created_at', { ascending: true });
       if (error) throw error;
       return (data ?? []) as CompanyMember[];
     },
-    enabled: !!profile?.company_id,
+    enabled: !!companyId,
   });
 }
 
-export function useTransferOwnership() {
+export function useTransferOwnership(companyIdOverride?: string) {
   const qc = useQueryClient();
   const { user } = useAuth();
   const { data: profile } = useProfile();
 
   return useMutation({
     mutationFn: async (targetUserId: string) => {
+      const companyId = companyIdOverride ?? profile!.company_id!;
       const { error } = await supabase.rpc('transfer_ownership', {
         _current_owner_id: user!.id,
         _new_owner_id: targetUserId,
-        _company_id: profile!.company_id!,
+        _company_id: companyId,
       });
       if (error) throw error;
     },
@@ -52,17 +54,18 @@ export function useTransferOwnership() {
   });
 }
 
-export function useRemoveMember() {
+export function useRemoveMember(companyIdOverride?: string) {
   const qc = useQueryClient();
   const { user } = useAuth();
   const { data: profile } = useProfile();
 
   return useMutation({
     mutationFn: async (targetUserId: string) => {
+      const companyId = companyIdOverride ?? profile!.company_id!;
       const { error } = await supabase.rpc('remove_member', {
         _actor_id: user!.id,
         _target_id: targetUserId,
-        _company_id: profile!.company_id!,
+        _company_id: companyId,
       });
       if (error) throw error;
     },

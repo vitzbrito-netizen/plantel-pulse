@@ -4,6 +4,7 @@ import { Client } from '@/hooks/useClients';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Users, Plus, Copy, Link2, Clock, CheckCircle2, XCircle, RefreshCw, Loader2, UserPlus, Mail, Building2 } from 'lucide-react';
+import MemberManagement from '@/components/MemberManagement';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -153,9 +154,19 @@ export default function FounderEquipeTab({ clients }: Props) {
       {!selectedCompanyId ? (
         <div className="text-center py-16">
           <Building2 className="w-12 h-12 mx-auto text-muted-foreground/30 mb-4" />
-          <p className="text-muted-foreground">Selecione um cliente para ver os convites.</p>
+          <p className="text-muted-foreground">Selecione um cliente para ver a equipe.</p>
         </div>
-      ) : isLoading ? (
+      ) : (
+      <>
+      {/* Members section */}
+      <div className="mb-8">
+        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">Membros</h3>
+        <MemberManagement companyId={selectedCompanyId} />
+      </div>
+
+      {/* Invites section */}
+      <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">Convites</h3>
+      {isLoading ? (
         <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-muted-foreground" /></div>
       ) : invites.length === 0 ? (
         <div className="text-center py-16 bg-card rounded-xl border border-border border-dashed">
@@ -223,6 +234,8 @@ export default function FounderEquipeTab({ clients }: Props) {
             })}
           </div>
         </div>
+      )}
+      </>
       )}
 
       {/* Modal */}

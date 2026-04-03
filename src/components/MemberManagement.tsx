@@ -22,11 +22,15 @@ const roleIcons: Record<string, React.ReactNode> = {
   employee: <User className="w-3.5 h-3.5" />,
 };
 
-export default function MemberManagement() {
+interface Props {
+  companyId?: string;
+}
+
+export default function MemberManagement({ companyId }: Props) {
   const { user, signOut } = useAuth();
-  const { data: members = [], isLoading } = useCompanyMembers();
-  const transferOwnership = useTransferOwnership();
-  const removeMember = useRemoveMember();
+  const { data: members = [], isLoading } = useCompanyMembers(companyId);
+  const transferOwnership = useTransferOwnership(companyId);
+  const removeMember = useRemoveMember(companyId);
 
   const [transferTarget, setTransferTarget] = useState<CompanyMember | null>(null);
   const [removeTarget, setRemoveTarget] = useState<CompanyMember | null>(null);
