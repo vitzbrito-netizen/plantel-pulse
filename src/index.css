@@ -6,39 +6,39 @@
 
 @layer base {
   :root {
-    /* Blue Vibrant Theme */
-    --background: 207 90% 48%; /* vibrant blue */
-    --foreground: 0 0% 100%; /* white */
+    /* Dark Theme */
+    --background: 220 25% 8%; /* dark navy */
+    --foreground: 210 20% 93%;
 
-    --card: 207 85% 42%; /* slightly darker blue */
-    --card-foreground: 0 0% 100%;
+    --card: 220 30% 13%;
+    --card-foreground: 210 20% 93%;
 
-    --popover: 207 85% 38%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 220 30% 13%;
+    --popover-foreground: 210 20% 93%;
 
-    --primary: 207 100% 30%; /* deep blue for buttons */
+    --primary: 207 100% 50%; /* vibrant blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 207 70% 55%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 220 25% 16%;
+    --secondary-foreground: 210 20% 93%;
 
-    --muted: 207 60% 40%;
-    --muted-foreground: 207 30% 80%;
+    --muted: 220 25% 18%;
+    --muted-foreground: 215 15% 60%;
 
-    --accent: 207 100% 60%;
+    --accent: 207 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 207 60% 55%; /* blue border */
-    --input: 207 60% 45%;
-    --ring: 207 100% 70%;
+    --border: 220 25% 20%;
+    --input: 220 25% 20%;
+    --ring: 207 100% 50%;
 
     --radius: 0.5rem;
 
     /* Header */
-    --header: 207 90% 38%; /* darker blue header */
+    --header: 220 30% 6%;
 
     /* Tier colors - FM gold/silver/bronze style */
     --tier-lider: 43 96% 56%;
@@ -59,14 +59,14 @@
     --ovr-low: 0 84% 60%;
 
     /* Sidebar */
-    --sidebar-background: 207 85% 35%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 207 100% 25%;
+    --sidebar-background: 220 30% 10%;
+    --sidebar-foreground: 210 20% 93%;
+    --sidebar-primary: 207 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 207 70% 45%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 207 60% 50%;
-    --sidebar-ring: 207 100% 70%;
+    --sidebar-accent: 220 25% 18%;
+    --sidebar-accent-foreground: 210 20% 93%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 207 100% 50%;
 
     font-family: 'Inter', sans-serif;
   }
@@ -120,21 +120,21 @@ html {
 }
 
 .morale-bar-track {
-  background: hsl(207, 50%, 35%);
+  background: hsl(220, 25%, 22%);
 }
 
 /* Table Rows */
 .fm-table-row {
   transition: background-color 0.15s ease;
-  border-bottom: 1px solid hsl(207, 50%, 45%);
+  border-bottom: 1px solid hsl(220, 25%, 20%);
 }
 
 .fm-table-row:hover {
-  background-color: hsl(207, 70%, 38%);
+  background-color: hsl(220, 25%, 16%);
 }
 
 .fm-table-row.selected {
-  background-color: hsl(207, 80%, 30%);
+  background-color: hsl(207, 80%, 20%);
 }
 
 /* FM Tier badges */
@@ -177,9 +177,9 @@ html {
 
 /* Dropdown Menu */
 .fm-dropdown {
-  background: hsl(207, 80%, 35%);
-  border: 1px solid hsl(207, 60%, 50%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: hsl(220, 30%, 14%);
+  border: 1px solid hsl(220, 25%, 22%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .fm-dropdown-item {
@@ -187,44 +187,44 @@ html {
 }
 
 .fm-dropdown-item:hover {
-  background-color: hsl(207, 70%, 40%);
+  background-color: hsl(220, 25%, 20%);
 }
 
 /* Sub-navigation */
 .fm-subnav {
-  background: hsl(207, 85%, 35%);
-  border-bottom: 1px solid hsl(207, 60%, 50%);
+  background: hsl(220, 30%, 10%);
+  border-bottom: 1px solid hsl(220, 25%, 20%);
 }
 
 .fm-subnav-item {
   padding: 8px 16px;
   font-size: 13px;
   font-weight: 500;
-  color: hsl(207, 30%, 80%);
+  color: hsl(215, 15%, 60%);
   transition: all 0.15s ease;
   border-bottom: 2px solid transparent;
 }
 
 .fm-subnav-item:hover {
-  color: hsl(0, 0%, 100%);
-  background: hsl(207, 70%, 40%);
+  color: hsl(210, 20%, 93%);
+  background: hsl(220, 25%, 16%);
 }
 
 .fm-subnav-item.active {
-  color: hsl(0, 0%, 100%);
-  border-bottom-color: hsl(0, 0%, 100%);
+  color: hsl(210, 20%, 93%);
+  border-bottom-color: hsl(207, 100%, 50%);
 }
 
 /* Sidebar Panel */
 .fm-sidebar {
-  background: hsl(207, 85%, 35%);
-  border-left: 1px solid hsl(207, 60%, 50%);
+  background: hsl(220, 30%, 10%);
+  border-left: 1px solid hsl(220, 25%, 20%);
 }
 
 /* FM Skill bars */
 .fm-skill-bar {
   height: 14px;
-  background: hsl(207, 50%, 35%);
+  background: hsl(220, 25%, 18%);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -253,7 +253,7 @@ html {
 
 .fm-pyramid-connector {
   position: absolute;
-  background: hsl(207, 50%, 50%);
+  background: hsl(220, 25%, 25%);
 }
 
 /* FM Relationship Grid */
@@ -264,7 +264,7 @@ html {
   align-items: center;
   justify-content: center;
   font-size: 10px;
-  border: 1px solid hsl(245, 25%, 20%);
+  border: 1px solid hsl(220, 25%, 20%);
 }
 
 .fm-rel-positive {
@@ -278,30 +278,30 @@ html {
 }
 
 .fm-rel-neutral {
-  background: hsl(245, 25%, 15%);
-  color: hsl(240, 17%, 50%);
+  background: hsl(220, 25%, 15%);
+  color: hsl(215, 15%, 50%);
 }
 
-/* FM Compact scrollbar */
+/* Compact scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(245, 33%, 10%);
+  background: hsl(220, 30%, 10%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(245, 25%, 25%);
+  background: hsl(220, 25%, 25%);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(245, 25%, 35%);
+  background: hsl(220, 25%, 35%);
 }
 
-/* FM Flight Risk icon pulse */
+/* Flight Risk icon pulse */
 @keyframes pulse-risk {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -311,15 +311,15 @@ html {
   animation: pulse-risk 1.5s ease-in-out infinite;
 }
 
-/* FM Card hover */
+/* Card hover */
 .fm-card {
-  background: hsl(245, 33%, 12%);
-  border: 1px solid hsl(245, 25%, 20%);
+  background: hsl(220, 30%, 13%);
+  border: 1px solid hsl(220, 25%, 20%);
   transition: border-color 0.15s ease;
 }
 
 .fm-card:hover {
-  border-color: hsl(245, 25%, 30%);
+  border-color: hsl(220, 25%, 30%);
 }
 
 /* Alert pulse */
