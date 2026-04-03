@@ -101,11 +101,11 @@ export default function Landing() {
       <section id="features" className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Tudo que você precisa para{' '}
-              <span className="text-white/80">gerenciar pessoas</span>
+              <span className="text-primary">gerenciar pessoas</span>
             </h2>
-            <p className="text-white/60 max-w-xl mx-auto">
+            <p className="text-muted-foreground max-w-xl mx-auto">
               Do quadro de pessoal ao pulse check, cada ferramenta foi pensada para gestores de clínicas e laboratórios.
             </p>
           </div>
