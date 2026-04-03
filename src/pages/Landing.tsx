@@ -225,10 +225,10 @@ export default function Landing() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-24 px-6 bg-card/30 border-y border-border/50">
+      <section id="faq" className="py-24 px-6 bg-white/5 border-y border-white/10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Perguntas Frequentes</h2>
+            <h2 className="text-3xl font-bold mb-4 text-white">Perguntas Frequentes</h2>
           </div>
 
           <div className="space-y-4">
