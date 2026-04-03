@@ -1,5 +1,5 @@
 import { Employee, getInitials, getMoraleColor, getMoraleLabel, getTierColor, isContractExpiring, daysUntilExpiry } from '@/data/employees';
-import { AlertTriangle, Flame, Clock, Moon, Sun, Zap } from 'lucide-react';
+import { AlertTriangle, Flame, Clock, Moon, Sun, Zap, CircleDashed } from 'lucide-react';
 
 interface Props {
   employee: Employee;
