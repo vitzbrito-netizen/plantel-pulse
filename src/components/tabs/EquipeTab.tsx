@@ -1,6 +1,7 @@
 import { employees, Employee, getMoraleColor, daysUntilExpiry, isContractExpiring, getInitials } from '@/data/employees';
-import { Flame, Moon, Sun, Zap, Trophy, TrendingUp, AlertTriangle, DollarSign, ChevronUp, ChevronDown, ChevronRight } from 'lucide-react';
+import { Flame, Moon, Sun, Zap, Trophy, TrendingUp, AlertTriangle, DollarSign, ChevronUp, ChevronDown, ChevronRight, LayoutGrid, List } from 'lucide-react';
 import { useState } from 'react';
+import { EmployeeCard } from '@/components/EmployeeCard';
 
 interface Props {
   onSelectEmployee: (emp: Employee) => void;
