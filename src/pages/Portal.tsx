@@ -37,6 +37,31 @@ export default function Portal() {
   // Determine role: profile.role takes priority, fallback to legacy user_roles
   const activeRole = profile?.role ?? legacyRole;
 
+  // Removed member: has profile but no role and no company
+  if (profile && !profile.role && !profile.company_id && !quizBlocked && !quizDone) {
+    // Check if user was previously a member (created_at != updated_at suggests they were modified)
+    // Show removed screen
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-8">
+        <div className="bg-card rounded-2xl border shadow-lg max-w-md w-full p-8 text-center">
+          <div className="w-16 h-16 bg-destructive/10 border-2 border-destructive/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <AlertTriangle className="w-8 h-8 text-destructive" />
+          </div>
+          <h2 className="text-lg font-bold text-foreground mb-3">Acesso removido</h2>
+          <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+            Você foi removido desta empresa. Entre em contato com o responsável caso isso seja um erro.
+          </p>
+          <button
+            onClick={signOut}
+            className="w-full px-4 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            Sair
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // Quiz blocked: user scored manager/employee without invite
   if (quizBlocked && !activeRole) {
     return <RoleBlocked onRestartQuiz={() => setQuizBlocked(false)} />;
