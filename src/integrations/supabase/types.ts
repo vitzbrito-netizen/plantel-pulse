@@ -311,6 +311,18 @@ export type Database = {
         }
         Returns: boolean
       }
+      remove_member: {
+        Args: { _actor_id: string; _company_id: string; _target_id: string }
+        Returns: undefined
+      }
+      transfer_ownership: {
+        Args: {
+          _company_id: string
+          _current_owner_id: string
+          _new_owner_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "founder" | "owner" | "manager" | "employee"
