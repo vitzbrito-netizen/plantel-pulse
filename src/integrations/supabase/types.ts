@@ -56,6 +56,145 @@ export type Database = {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          priority: Database["public"]["Enums"]["task_priority"]
+          status: Database["public"]["Enums"]["task_status"]
+          team_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          team_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          team_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "team_members"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_members: {
+        Row: {
+          created_at: string
+          id: string
+          morale: number
+          name: string
+          ovr: number
+          role: string
+          team_id: string
+          tier: Database["public"]["Enums"]["member_tier"]
+          turno: Database["public"]["Enums"]["member_turno"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          morale?: number
+          name: string
+          ovr?: number
+          role?: string
+          team_id: string
+          tier?: Database["public"]["Enums"]["member_tier"]
+          turno?: Database["public"]["Enums"]["member_turno"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          morale?: number
+          name?: string
+          ovr?: number
+          role?: string
+          team_id?: string
+          tier?: Database["public"]["Enums"]["member_tier"]
+          turno?: Database["public"]["Enums"]["member_turno"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          client_id: string
+          created_at: string
+          id: string
+          manager_id: string | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          id?: string
+          manager_id?: string | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          id?: string
+          manager_id?: string | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teams_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
@@ -89,6 +228,10 @@ export type Database = {
     }
     Enums: {
       app_role: "founder" | "owner" | "manager" | "employee"
+      member_tier: "Líder" | "Influente" | "Promessa"
+      member_turno: "Diurno" | "Noturno" | "Integral"
+      task_priority: "low" | "medium" | "high"
+      task_status: "pending" | "in_progress" | "done"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -217,6 +360,10 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["founder", "owner", "manager", "employee"],
+      member_tier: ["Líder", "Influente", "Promessa"],
+      member_turno: ["Diurno", "Noturno", "Integral"],
+      task_priority: ["low", "medium", "high"],
+      task_status: ["pending", "in_progress", "done"],
     },
   },
 } as const
