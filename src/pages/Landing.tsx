@@ -276,21 +276,21 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-10 px-6">
+      <footer className="border-t border-white/10 py-10 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-primary rounded flex items-center justify-center">
-              <span className="text-xs font-bold text-primary-foreground">R</span>
+            <div className="w-7 h-7 bg-white/20 rounded flex items-center justify-center">
+              <span className="text-xs font-bold text-white">R</span>
             </div>
-            <span className="text-sm font-bold tracking-tight">REGIAE</span>
+            <span className="text-sm font-bold tracking-tight text-white">REGIAE</span>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-white/50">
             © 2026 Regiae · Todos os direitos reservados
           </p>
-          <div className="flex gap-6 text-xs text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">Termos</a>
-            <a href="#" className="hover:text-foreground transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-foreground transition-colors">Contato</a>
+          <div className="flex gap-6 text-xs text-white/50">
+            <a href="#" className="hover:text-white transition-colors">Termos</a>
+            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
+            <a href="#" className="hover:text-white transition-colors">Contato</a>
           </div>
         </div>
       </footer>
