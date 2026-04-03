@@ -120,21 +120,21 @@ html {
 }
 
 .morale-bar-track {
-  background: hsl(220, 25%, 22%);
+  background: hsl(210, 15%, 90%);
 }
 
 /* Table Rows */
 .fm-table-row {
   transition: background-color 0.15s ease;
-  border-bottom: 1px solid hsl(220, 25%, 20%);
+  border-bottom: 1px solid hsl(210, 15%, 90%);
 }
 
 .fm-table-row:hover {
-  background-color: hsl(220, 25%, 16%);
+  background-color: hsl(210, 20%, 96%);
 }
 
 .fm-table-row.selected {
-  background-color: hsl(207, 80%, 20%);
+  background-color: hsl(207, 80%, 95%);
 }
 
 /* FM Tier badges */
