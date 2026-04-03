@@ -276,10 +276,10 @@ export function EquipeTab({ onSelectEmployee, selectedEmployee, activeSubTab }: 
       <div className="flex gap-4 h-full">
         <div className="flex-1 flex flex-col min-w-0">
           <div className="flex items-center gap-2 mb-3">
-            <QuickStat icon={<Trophy className="w-3 h-3 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} />
-            <QuickStat icon={<TrendingUp className="w-3 h-3 text-morale-high" />} label="OVR 80+" value={highOvr} />
-            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" />
-            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" />
+            <QuickStat icon={<Trophy className="w-3 h-3 text-tier-lider" />} label="Líderes" value={employees.filter(e => e.tier === 'Líder').length} tooltip="Colaboradores no tier Líder — peças-chave da equipe" />
+            <QuickStat icon={<TrendingUp className="w-3 h-3 text-morale-high" />} label="OVR 80+" value={highOvr} tooltip="Colaboradores com Overall Rating acima de 80" />
+            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-urgente" />} label="Risco Fuga" value={flightRisks} color="text-urgente" tooltip="Colaboradores com risco de deixar a empresa" />
+            <QuickStat icon={<AlertTriangle className="w-3 h-3 text-atencao" />} label="OVR <65" value={lowOvr} color="text-atencao" tooltip="Colaboradores com Overall Rating abaixo de 65 — precisam de desenvolvimento" />
             <div className="flex-1" />
             <div className="flex items-center bg-muted/40 rounded-lg p-0.5 gap-0.5">
               <button
